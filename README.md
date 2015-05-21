@@ -2,7 +2,7 @@
 One day, his wife killed by "zakuza", and he decided kill all of them
 
 # Engine
-Cocos2d-x 2.6
+Cocos2d-x 3.6
 
 # Animation
 Cocos skeletal animation editor 1.6 ( can install by Cocos studio)
