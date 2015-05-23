@@ -34,7 +34,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::create("My Game");
+        glview = GLViewImpl::create("Ninja Revenge");
         director->setOpenGLView(glview);
     }
 
@@ -43,6 +43,21 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
+
+	auto screenSize = glview->getFrameSize();
+	auto designSize = Size(480, 320);
+
+	auto fileUtils = FileUtils::getInstance();
+	std::vector<std::string> searchPaths;
+
+	searchPaths.push_back("hd");
+	searchPaths.push_back("hd/animations");
+	searchPaths.push_back("hd/sprites");
+
+	fileUtils->setSearchPaths(searchPaths);
+
+	//
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("player/player.ExportJson");
 
     register_all_packages();
 
