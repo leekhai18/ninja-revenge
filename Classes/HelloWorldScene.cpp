@@ -6,7 +6,7 @@ Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
 	auto scene = Scene::createWithPhysics();
-	scene->getPhysicsWorld()->setGravity(Vec2(0, -500));
+	scene->getPhysicsWorld()->setGravity(Vec2(0, -700));
 	if (DEBUG_MODE)
 		scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
@@ -34,8 +34,21 @@ bool HelloWorld::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(1, 0, 0), 3);
+	auto ground = PhysicsBody::createBox(Size(960, 10), PhysicsMaterial(0, 0, 0));
+	ground->setDynamic(false);
+	ground->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
+	ground->setContactTestBitmask(true);
+	auto groundNode = Node::create();
+	groundNode->setTag(OBJECT_TAG::GROUND_TAG);
+	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y));
+	groundNode->setPhysicsBody(ground);
+	this->addChild(groundNode);
+
+	auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(1, 0, 0), 3);	
+	edgeBody->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
+	edgeBody->setContactTestBitmask(true);
 	auto edgeNode = Node::create();
+	edgeNode->setTag(OBJECT_TAG::GROUND_TAG);
 	edgeNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 	edgeNode->setPhysicsBody(edgeBody);
 	this->addChild(edgeNode);
@@ -43,6 +56,12 @@ bool HelloWorld::init()
     auto sprite = Sprite::create("bg_menu.png");   
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(sprite, 0);
+
+	auto bg = BackgroundLayer::create();
+	this->addChild(bg);
+
+	auto wall = WallLayer::create();
+	this->addChild(wall);
 
 	Player* player = Player::create();
 	player->run();
@@ -67,7 +86,7 @@ bool HelloWorld::init()
 
 	// trigger when you let up
 	listener1->onTouchEnded = [=](Touch* touch, Event* event){
-		player->attack();
+		player->jump();
 	};
 
 	// Add listener
@@ -76,12 +95,3 @@ bool HelloWorld::init()
     return true;
 }
 
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
-{
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
-}

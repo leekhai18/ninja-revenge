@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Global.h"
+#include "BackgroundLayer.h"
+#include "WallLayer.h"
 
 class HelloWorld : public cocos2d::Layer
 {
