@@ -36,6 +36,12 @@
     <ClCompile Include="..\Classes\WallLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BrigdeLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HouseLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -60,6 +66,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\WallLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BrigdeLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HouseLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
