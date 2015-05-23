@@ -4,7 +4,10 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "Global.h"
-
+#include "HouseLayer.h"
+#include "WallLayer.h"
+#include "BrigdeLayer.h"
+#include "RockLayer.h"
 class HelloWorld : public cocos2d::Layer
 {
 private:

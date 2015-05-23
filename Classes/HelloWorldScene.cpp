@@ -44,6 +44,20 @@ bool HelloWorld::init()
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(sprite, 0);
 
+	auto rock = RockLayer::create();
+	this->addChild(rock);
+
+	auto wall = WallLayer::create();
+	this->addChild(wall);
+
+
+
+	auto house = HouseLayer::create();
+	this->addChild(house);
+
+	auto brigde = BrigdeLayer::inst();
+	this->addChild(brigde);
+
 	Player* player = Player::create();
 	player->run();
 	player->setPosition(Vec2(visibleSize.width * 0.2f + origin.x, visibleSize.height * 0.5f + origin.y));
@@ -76,12 +90,3 @@ bool HelloWorld::init()
     return true;
 }
 
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
-{
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
-}
