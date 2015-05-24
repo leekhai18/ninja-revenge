@@ -140,7 +140,7 @@
           "dI": 0,
           "x": 31.568851470947266,
           "y": 2.0282974243164062,
-          "z": 9,
+          "z": 10,
           "cX": 1.0,
           "cY": 1.0,
           "kX": 0.12447685,
@@ -169,7 +169,7 @@
         {
           "name": "Rope",
           "parent": "Head",
-          "dI": 4,
+          "dI": 0,
           "x": 17.824771881103516,
           "y": 31.916801452636719,
           "z": 14,
@@ -368,9 +368,9 @@
           "name": "Sword",
           "parent": "R_Hand_3",
           "dI": 0,
-          "x": 5.6052918434143066,
-          "y": -1.5273838043212891,
-          "z": 10,
+          "x": 5.605292797088623,
+          "y": -1.5273847579956055,
+          "z": 9,
           "cX": 1.0,
           "cY": 1.0,
           "kX": -3.04192424,
@@ -782,42 +782,6 @@
               ]
             },
             {
-              "name": "Sword",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 40,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            },
-            {
               "name": "Head",
               "dl": 0.0,
               "frame_data": [
@@ -861,6 +825,42 @@
                   "kX": -0.0661607757,
                   "kY": 0.0661607757,
                   "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 40,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Sword",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -1651,7 +1651,7 @@
               ]
             },
             {
-              "name": "Sword",
+              "name": "Head",
               "dl": 0.0,
               "frame_data": [
                 {
@@ -1687,7 +1687,7 @@
               ]
             },
             {
-              "name": "Head",
+              "name": "Sword",
               "dl": 0.0,
               "frame_data": [
                 {
@@ -2269,7 +2269,7 @@
         },
         {
           "name": "Attack",
-          "dr": 40,
+          "dr": 41,
           "lp": false,
           "to": 0,
           "drTW": 0,
@@ -2580,57 +2580,6 @@
               ]
             },
             {
-              "name": "Sword",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.09656678,
-                  "kY": -0.09656678,
-                  "fi": 20,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 40,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            },
-            {
               "name": "Head",
               "dl": 0.0,
               "frame_data": [
@@ -2674,6 +2623,57 @@
                   "kX": -0.0661607757,
                   "kY": 0.0661607757,
                   "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 40,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Sword",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.09656678,
+                  "kY": -0.09656678,
+                  "fi": 20,
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -3479,42 +3479,6 @@
               ]
             },
             {
-              "name": "Sword",
-              "dl": 0.0,
-              "frame_data": [
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 0,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                },
-                {
-                  "dI": 0,
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0,
-                  "cX": 1.0,
-                  "cY": 1.0,
-                  "kX": 0.0,
-                  "kY": 0.0,
-                  "fi": 40,
-                  "twE": 0,
-                  "tweenFrame": true,
-                  "bd_src": 1,
-                  "bd_dst": 771
-                }
-              ]
-            },
-            {
               "name": "Head",
               "dl": 0.0,
               "frame_data": [
@@ -3557,6 +3521,42 @@
                   "cY": 1.0,
                   "kX": 0.242317617,
                   "kY": -0.242317617,
+                  "fi": 40,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Sword",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
                   "fi": 40,
                   "twE": 0,
                   "tweenFrame": true,
@@ -3943,7 +3943,7 @@
       "width": 82.0,
       "height": 99.0,
       "pX": 0.5,
-      "pY": 0.5050505,
+      "pY": 0.5,
       "plistFile": ""
     },
     {
@@ -4043,6 +4043,10 @@
       "plistFile": ""
     }
   ],
-  "config_file_path": [],
-  "config_png_path": []
+  "config_file_path": [
+    "player0.plist"
+  ],
+  "config_png_path": [
+    "player0.png"
+  ]
 }

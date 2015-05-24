@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "Global.h"
 
 Player::Player() : Armature(), isJumping(false)
 {
@@ -14,25 +14,38 @@ Player::~Player()
 Player* Player::create()
 {
 	Player* player = new Player();
+
 	if (player && player->init("player"))
 	{
 		player->initPlayer();
 		player->autorelease();
+
 		return player;
 	}
+
 	CC_SAFE_DELETE(player);
+
 	return nullptr;
 }
 
 bool Player::initPlayer()
 {
+	this->setTag(OBJECT_TAG::PLAYER_TAG);
+
 	//add event listener
 	this->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Player::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 	//add physic body
 	auto body = PhysicsBody::createBox(this->getBoundingBox().size, PhysicsMaterial(1, 0, 0));
 	body->setRotationEnable(false);
+	body->setCollisionBitmask(OBJECT_BISMASK::PLAYER_MASK);
+	body->setContactTestBitmask(true);
 	this->setPhysicsBody(body);
+
+	//add collision detetion
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(Player::onContactBegin, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	return true;
 
@@ -51,8 +64,24 @@ void Player::run()
 
 void Player::jump()
 {
-	this->getAnimation()->play("Jump");
-	this->setState(ESTATE::JUMP);
+	if (!isJumping && state == ESTATE::RUN) {
+		auto vel = getPhysicsBody()->getVelocity();
+		vel.y = 450;
+		getPhysicsBody()->setVelocity(vel);
+		this->getAnimation()->play("Jump");		
+		this->setState(ESTATE::JUMP);
+		isJumping = true;
+	}
+	else
+	{
+		if (isJumping && state == ESTATE::JUMP) {
+			auto vel = getPhysicsBody()->getVelocity();
+			vel.y = 450;
+			getPhysicsBody()->setVelocity(vel);
+			this->getAnimation()->play("Jump2");
+			this->setState(ESTATE::JUMP2);			
+		}
+	}
 }
 
 void Player::attack()
@@ -77,13 +106,22 @@ void Player::animationEvent(Armature *armature, MovementEventType movementType, 
 		}
 		else if (movementID == "Jump")
 		{
-			this->run();
+			
 		}
 	}
 }
 
-void Player::addEvent()
+bool Player::onContactBegin(PhysicsContact& contact)
 {
-	//add event listener
-	this->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Player::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	auto a = contact.getShapeA()->getBody()->getNode();
+	auto b = contact.getShapeB()->getBody()->getNode();
+	
+	CCLOG("onContactBegin: %d vs %d", a->getTag(), b->getTag());
+	if (a->getTag() == OBJECT_TAG::GROUND_TAG || b->getTag() == OBJECT_TAG::GROUND_TAG)
+	{
+		isJumping = false;
+		this->run();
+	}
+	//bodies can collide
+	return true;
 }
