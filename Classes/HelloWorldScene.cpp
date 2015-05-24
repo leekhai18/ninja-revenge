@@ -16,7 +16,7 @@ Scene* HelloWorld::createScene()
     // add layer as a child to scene
     scene->addChild(layer);
 	layer->SetPhysicsWorld(scene->getPhysicsWorld());
-
+	
     // return the scene
     return scene;
 }
@@ -40,23 +40,16 @@ bool HelloWorld::init()
 	edgeNode->setPhysicsBody(edgeBody);
 	this->addChild(edgeNode);
     
-    auto sprite = Sprite::create("bg_menu.png");   
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    this->addChild(sprite, 0);
+    //auto sprite = Sprite::create("bg_menu.png");   
+    //sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    //this->addChild(sprite, 0);
 
-	auto rock = RockLayer::create();
-	this->addChild(rock);
-
-	auto wall = WallLayer::create();
-	this->addChild(wall);
-
-
-
-	auto house = HouseLayer::create();
-	this->addChild(house);
-
-	auto brigde = BrigdeLayer::inst();
-	this->addChild(brigde);
+	this->addChild(Background::inst()->createBackground());
+	this->addChild(Background::inst()->createRock());
+	this->addChild(Background::inst()->createWall());
+	this->addChild(Background::inst()->createHouse());
+	this->addChild(Background::inst()->createBrigde());
+	Background::inst()->setSpeed(1.0f);
 
 	Player* player = Player::create();
 	player->run();

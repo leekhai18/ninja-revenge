@@ -1,6 +1,16 @@
 #include "HouseLayer.h"
 
 USING_NS_CC;
+HouseLayer* HouseLayer::instance = NULL;
+
+HouseLayer* HouseLayer::inst(){
+	if (!instance){
+		instance = new HouseLayer();
+		instance->init();
+	}
+	return instance;
+}
+
 
 Scene* HouseLayer::createScene()
 {
@@ -43,7 +53,7 @@ void HouseLayer::update(float delta){
 		this->addHouse(random(0, 5));
 	}
 	else{
-		house->setPosition(house->getPosition().x - delta*HOUSE_SPEED, house->getPosition().y);
+		house->setPosition(house->getPosition().x - delta*layerSpeed, house->getPosition().y);
 	}
 
 }

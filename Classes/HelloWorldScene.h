@@ -8,10 +8,12 @@
 #include "WallLayer.h"
 #include "BrigdeLayer.h"
 #include "RockLayer.h"
+#include "BackgroundLayer.h"
+#include "Background.h"
 class HelloWorld : public cocos2d::Layer
 {
 private:
-
+	static cocos2d::Scene* scene;
 	cocos2d::PhysicsWorld *sceneWorld;
 	void SetPhysicsWorld(cocos2d::PhysicsWorld *world) { sceneWorld = world; };
 
