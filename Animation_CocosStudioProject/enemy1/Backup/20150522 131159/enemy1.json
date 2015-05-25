@@ -1,0 +1,550 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.6.0.0",
+      "version": 1.6,
+      "name": "enemy1",
+      "bone_data": [
+        {
+          "name": "body",
+          "parent": "",
+          "dI": 0,
+          "x": 4.4090576171875,
+          "y": -5.6709041595458984,
+          "z": 2,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -1.990993,
+          "kY": 1.990993,
+          "arrow_x": 46.798355102539062,
+          "arrow_y": 7.9651990745333023E-06,
+          "effectbyskeleton": true,
+          "bl": 46,
+          "display_data": [
+            {
+              "name": "e0_body.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 20.9003067,
+                  "y": -8.044051,
+                  "cX": 1.00000012,
+                  "cY": 1.00000012,
+                  "kX": 1.99099255,
+                  "kY": -1.9909929
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "head",
+          "parent": "body",
+          "dI": 0,
+          "x": 46.233200073242188,
+          "y": -5.7217550277709961,
+          "z": 4,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -0.316459656,
+          "kY": 0.316459656,
+          "arrow_x": 52.774246215820312,
+          "arrow_y": -2.6846431865124032E-05,
+          "effectbyskeleton": true,
+          "bl": 52,
+          "display_data": [
+            {
+              "name": "e0_head.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 25.3065643,
+                  "y": -1.59733963,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 2.30745268,
+                  "kY": -2.30745339
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "lefthand",
+          "parent": "body",
+          "dI": 0,
+          "x": 41.182521820068359,
+          "y": 7.4877424240112305,
+          "z": 5,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 3.8984642,
+          "kY": -3.8984642,
+          "arrow_x": 38.526561737060547,
+          "arrow_y": -2.5291192287113518E-05,
+          "effectbyskeleton": true,
+          "bl": 38,
+          "display_data": [
+            {
+              "name": "e0_sword_arm.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 23.699398,
+                  "y": 1.36001587,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 4.3757143,
+                  "kY": 1.90747154
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "sword",
+          "parent": "lefthand",
+          "dI": 0,
+          "x": 46.806800842285156,
+          "y": 3.8612461090087891,
+          "z": 6,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -0.3366748,
+          "kY": 0.3366748,
+          "arrow_x": 0.90906113386154175,
+          "arrow_y": 7.7116483225836419E-06,
+          "effectbyskeleton": true,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "e0_sword_hand.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 6.181801,
+                  "y": 25.5454865,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -1.57079637,
+                  "kY": 1.57079637
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_leg",
+          "parent": "body",
+          "dI": 0,
+          "x": -7.4877467155456543,
+          "y": -5.6157937049865723,
+          "z": 3,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 3.163267,
+          "kY": -3.163267,
+          "arrow_x": 37.482780456542969,
+          "arrow_y": -1.3584934094978962E-05,
+          "effectbyskeleton": true,
+          "bl": 37,
+          "display_data": [
+            {
+              "name": "e0_font_leg.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 20.1216431,
+                  "y": 2.575325,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -1.17227352,
+                  "kY": 1.17227328
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_leg",
+          "parent": "body",
+          "dI": 0,
+          "x": -2.3840775489807129,
+          "y": 8.0351896286010742,
+          "z": 1,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 4.025437,
+          "kY": -4.025437,
+          "arrow_x": 38.622928619384766,
+          "arrow_y": 4.0560635170550086E-06,
+          "effectbyskeleton": true,
+          "bl": 38,
+          "display_data": [
+            {
+              "name": "e0_back_leg.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 25.6537781,
+                  "y": -0.4878235,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 4.248741,
+                  "kY": 2.03444433
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "enemy1",
+      "mov_data": [
+        {
+          "name": "Idle",
+          "dr": 61,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "head",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.221045837,
+                  "kY": -0.221045837,
+                  "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "sword",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.2764382,
+                  "kY": 0.2764382,
+                  "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "lefthand",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.142601714,
+                  "kY": -0.142601714,
+                  "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "right_leg",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0696282238,
+                  "kY": -0.0696282238,
+                  "fi": 30,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "left_leg",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "e0_back_leg",
+      "width": 48.0,
+      "height": 54.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "e0_body",
+      "width": 65.0,
+      "height": 69.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "e0_font_leg",
+      "width": 44.0,
+      "height": 56.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "e0_head",
+      "width": 67.0,
+      "height": 89.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "e0_sword_arm",
+      "width": 30.0,
+      "height": 49.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "e0_sword_hand",
+      "width": 103.0,
+      "height": 26.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [],
+  "config_png_path": []
+}
