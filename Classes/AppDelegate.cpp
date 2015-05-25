@@ -57,8 +57,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	fileUtils->setSearchPaths(searchPaths);
 
-	//
+	//init armature resource
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("player/player.ExportJson");
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("enemy1/enemy1.ExportJson");
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("enemy2/enemy2.ExportJson");
 	//director->setContentScaleFactor(0.50f);
     register_all_packages();
 

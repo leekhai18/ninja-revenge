@@ -1,10 +1,9 @@
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#ifndef _ENEMY_H_
+#define _ENEMY_H_
 
 #include "cocos2d.h"
 #include "extensions/cocos-ext.h"
 #include "cocostudio/CocoStudio.h"
-#include "Global.h"
 
 #if ENABLE_PHYSICS_BOX2D_DETECT
 #include "../../Box2DTestBed/GLES-Render.h"
@@ -12,38 +11,30 @@
 #elif ENABLE_PHYSICS_CHIPMUNK_DETECT
 #include "chipmunk.h"
 #endif
+#include "Global.h"
 
 USING_NS_CC;
 using namespace cocostudio;
 
-#define	PLAYER_JUMP_SPEED 650
-#define PLAYER_SLASH_DELAY 1.0f
 
-class Player : public Armature
+class Enemy : public Armature
 {
 private:
-	//ESTATE		state;
-	bool		isJumping;
-	float		timeDelayAttack;
+
 public:
 	//static create method
-	static Player* create();
+	static Enemy* create(ENEMY_TYPE _type);
 
-	//constructor & destroy
-	Player();
-	~Player();
+	bool initEnemy(ENEMY_TYPE _type);
 
-	bool initPlayer();
-	
 	//override
 	virtual void update(float dt);
 
 	//get & set method || SYNTHESIZE
 	CC_SYNTHESIZE(ESTATE, state, State);
-	
+	CC_SYNTHESIZE(ENEMY_TYPE, enemyType, EnemyType);
 	//behavior
-	void run();
-	void jump();
+	void idle();
 	void attack();
 	void die();
 

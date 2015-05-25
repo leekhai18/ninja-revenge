@@ -53,10 +53,6 @@ bool HelloWorld::init()
 	edgeNode->setPhysicsBody(edgeBody);
 	this->addChild(edgeNode);
 
-    //auto sprite = Sprite::create("bg_menu.png");   
-    //sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    //this->addChild(sprite, 0);
-
 	this->addChild(Background::inst()->createBackground());
 	this->addChild(Background::inst()->createRock());
 	this->addChild(Background::inst()->createWall());
@@ -68,6 +64,20 @@ bool HelloWorld::init()
 	player->run();
 	player->setPosition(Vec2(visibleSize.width * 0.2f + origin.x, visibleSize.height * 0.5f + origin.y));
 	this->addChild(player);
+
+	Enemy* enemy = Enemy::create(ENEMY1);
+	enemy->idle();
+	enemy->setPosition(Vec2(visibleSize.width * 0.5f + origin.x, visibleSize.height * 0.5f + origin.y));
+	this->addChild(enemy);
+
+	Enemy* enemy2 = Enemy::create(ENEMY2);
+	enemy2->idle();
+	enemy2->setPosition(Vec2(visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y));
+	this->addChild(enemy2);
+
+	HUDLayer* hud = HUDLayer::create();
+	hud->setPlayer(player);
+	this->addChild(hud);
 
 	//event
 	//  Create a "one by one" touch event listener

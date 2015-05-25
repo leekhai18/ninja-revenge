@@ -22,6 +22,23 @@ enum OBJECT_TAG
 	ARROW_TAG
 };
 
+enum ESTATE
+{
+	RUN = 0,
+	JUMP,
+	JUMP2,
+	DIE,
+	ATTACK,
+	IDLE
+};
+
+enum ENEMY_TYPE
+{
+	ENEMY1,
+	ENEMY2,
+	ENEMY3
+};
+
 class Global
 {
 private:

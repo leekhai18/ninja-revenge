@@ -54,6 +54,10 @@ bool Player::initPlayer()
 void Player::update(float dt)
 {
 	Armature::update(dt);
+	if (timeDelayAttack > 0)
+	{
+		timeDelayAttack -= dt;
+	}
 }
 
 void Player::run()
@@ -86,8 +90,12 @@ void Player::jump()
 
 void Player::attack()
 {
-	this->getAnimation()->play("Attack");
-	this->setState(ESTATE::ATTACK);
+	if (timeDelayAttack <= 0)
+	{
+		timeDelayAttack = PLAYER_SLASH_DELAY;
+		this->getAnimation()->play("Attack");
+		this->setState(ESTATE::ATTACK);
+	}
 }
 
 void Player::die()

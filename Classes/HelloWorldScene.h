@@ -3,8 +3,9 @@
 
 #include "cocos2d.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Global.h"
-
+#include "HUDLayer.h"
 #include "Background.h"
 
 class HelloWorld : public cocos2d::Layer
