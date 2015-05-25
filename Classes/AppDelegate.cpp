@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "StoryLayer.h"
 
 USING_NS_CC;
 
@@ -61,11 +62,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("player/player.ExportJson");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("enemy1/enemy1.ExportJson");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("enemy2/enemy2.ExportJson");
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("story/story.ExportJson");
 	//director->setContentScaleFactor(0.50f);
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = StoryLayer::createScene();
 
     // run
     director->runWithScene(scene);
