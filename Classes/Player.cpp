@@ -66,7 +66,7 @@ void Player::jump()
 {
 	if (!isJumping && state == ESTATE::RUN) {
 		auto vel = getPhysicsBody()->getVelocity();
-		vel.y = 450;
+		vel.y = PLAYER_JUMP_SPEED;	
 		getPhysicsBody()->setVelocity(vel);
 		this->getAnimation()->play("Jump");		
 		this->setState(ESTATE::JUMP);
@@ -76,7 +76,7 @@ void Player::jump()
 	{
 		if (isJumping && state == ESTATE::JUMP) {
 			auto vel = getPhysicsBody()->getVelocity();
-			vel.y = 450;
+			vel.y = PLAYER_JUMP_SPEED;
 			getPhysicsBody()->setVelocity(vel);
 			this->getAnimation()->play("Jump2");
 			this->setState(ESTATE::JUMP2);			

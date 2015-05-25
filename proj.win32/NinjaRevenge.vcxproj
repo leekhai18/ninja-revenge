@@ -150,6 +150,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\RockLayer.cpp" />
     <ClCompile Include="..\Classes\WallLayer.cpp" />
+    <ClCompile Include="HUDLayer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\RockLayer.h" />
     <ClInclude Include="..\Classes\WallLayer.h" />
+    <ClInclude Include="HUDLayer.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

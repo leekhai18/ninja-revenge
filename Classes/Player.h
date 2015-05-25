@@ -15,6 +15,8 @@
 USING_NS_CC;
 using namespace cocostudio;
 
+#define	PLAYER_JUMP_SPEED 650
+
 enum ESTATE
 {
 	RUN = 0,

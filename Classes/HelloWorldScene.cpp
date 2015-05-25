@@ -6,7 +6,7 @@ Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
 	auto scene = Scene::createWithPhysics();
-	scene->getPhysicsWorld()->setGravity(Vec2(0, -700));
+	scene->getPhysicsWorld()->setGravity(Vec2(0, -980));
 	if (DEBUG_MODE)
 		scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     

@@ -42,6 +42,7 @@
     <ClCompile Include="..\Classes\HouseLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="HUDLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -74,6 +75,7 @@
     <ClInclude Include="..\Classes\HouseLayer.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="HUDLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
