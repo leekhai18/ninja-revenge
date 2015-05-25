@@ -53,12 +53,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	searchPaths.push_back("hd");
 	searchPaths.push_back("hd/animations");
 	searchPaths.push_back("hd/sprites");
+	searchPaths.push_back("x2");
 
 	fileUtils->setSearchPaths(searchPaths);
 
 	//
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("player/player.ExportJson");
-
+	//director->setContentScaleFactor(0.50f);
     register_all_packages();
 
     // create a scene. it's an autorelease object

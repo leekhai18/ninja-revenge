@@ -42,7 +42,12 @@
     <ClCompile Include="..\Classes\HouseLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="HUDLayer.cpp" />
+    <ClCompile Include="..\Classes\Background.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundTemplate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -75,7 +80,12 @@
     <ClInclude Include="..\Classes\HouseLayer.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="HUDLayer.h" />
+    <ClInclude Include="..\Classes\Background.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackgroundTemplate.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

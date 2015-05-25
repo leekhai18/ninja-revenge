@@ -2,6 +2,16 @@
 
 USING_NS_CC;
 
+WallLayer* WallLayer::instance = NULL;
+
+WallLayer* WallLayer::inst(){
+	if (!instance){
+		instance = new WallLayer();
+		instance->init();
+	}
+	return instance;
+}
+
 Scene* WallLayer::createScene()
 {
 	// 'scene' is an autorelease object
@@ -55,21 +65,21 @@ void WallLayer::update(float delta){
 	for (auto &wall : walls){
 		if (wall->getPosition().x < - WALL_WIDTH){
 			int tag = wall->getTag() == 0 ? N_WALL - 1 : wall->getTag() - 1;
-			wall->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + WALL_WIDTH - WALL_SPEED*delta,
+			wall->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + WALL_WIDTH - layerSpeed*delta,
 				wall->getPosition().y));
 		}
 		else
-			wall->setPosition(Vec2(wall->getPosition().x - WALL_SPEED*delta, wall->getPosition().y));
+			wall->setPosition(Vec2(wall->getPosition().x - layerSpeed*delta, wall->getPosition().y));
 	}
 
 	for (auto &ground : grounds){
 		if (ground->getPosition().x < - GROUND_WIDTH){
 			int tag = ground->getTag() == N_WALL ? N_WALL + N_GROUND - 1 : ground->getTag() - 1;
-			ground->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + GROUND_WIDTH - GROUND_SPEED*delta,
+			ground->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + GROUND_WIDTH - layerSpeed*delta,
 				ground->getPosition().y));
 		}
 		else
-			ground->setPosition(Vec2(ground->getPosition().x - GROUND_SPEED*delta, ground->getPosition().y));
+			ground->setPosition(Vec2(ground->getPosition().x - layerSpeed*delta, ground->getPosition().y));
 	}
 }
 

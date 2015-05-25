@@ -53,7 +53,7 @@ void BrigdeLayer::update(float delta){
 		brigde = nullptr;
 	}
 	else{
-		brigde->setPosition(brigde->getPosition().x - delta*BRIGDE_SPEED, brigde->getPosition().y);
+		brigde->setPosition(brigde->getPosition().x - delta*layerSpeed, brigde->getPosition().y);
 	}
 
 }
