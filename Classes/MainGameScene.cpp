@@ -1,8 +1,8 @@
-#include "HelloWorldScene.h"
+#include "MainGameScene.h"
 
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* MainGame::createScene()
 {
     // 'scene' is an autorelease object
 	auto scene = Scene::createWithPhysics();
@@ -11,7 +11,7 @@ Scene* HelloWorld::createScene()
 		scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     // 'layer' is an autorelease object
-    auto layer = HelloWorld::create();
+	auto layer = MainGame::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -22,7 +22,7 @@ Scene* HelloWorld::createScene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool MainGame::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -34,24 +34,18 @@ bool HelloWorld::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto ground = PhysicsBody::createBox(Size(960, 10), PhysicsMaterial(0, 0, 0));
+	auto ground = PhysicsBody::createBox(Size(960*3, 10), PhysicsMaterial(0, 0, 0));
 	ground->setDynamic(false);
 	ground->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
 	ground->setContactTestBitmask(true);
+	ground->setCategoryBitmask(0x01);
+
 	auto groundNode = Node::create();
 	groundNode->setTag(OBJECT_TAG::GROUND_TAG);
+	groundNode->setName("Ground");
 	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y));
 	groundNode->setPhysicsBody(ground);
-	this->addChild(groundNode);
-
-	auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PhysicsMaterial(1, 0, 0), 3);	
-	edgeBody->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
-	edgeBody->setContactTestBitmask(true);
-	auto edgeNode = Node::create();
-	edgeNode->setTag(OBJECT_TAG::GROUND_TAG);
-	edgeNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
-	edgeNode->setPhysicsBody(edgeBody);
-	this->addChild(edgeNode);
+	this->addChild(groundNode);	
 
 	this->addChild(Background::inst()->createBackground());
 	this->addChild(Background::inst()->createRock());
@@ -64,7 +58,7 @@ bool HelloWorld::init()
 	player->run();
 	player->setPosition(Vec2(visibleSize.width * 0.2f + origin.x, visibleSize.height * 0.5f + origin.y));
 	this->addChild(player);
-
+	
 	Enemy* enemy = Enemy::create(ENEMY1);
 	enemy->idle();
 	enemy->setPosition(Vec2(visibleSize.width * 0.5f + origin.x, visibleSize.height * 0.5f + origin.y));

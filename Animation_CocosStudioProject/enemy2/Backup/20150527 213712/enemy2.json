@@ -1141,7 +1141,7 @@
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
-                  "fi": 11,
+                  "fi": 15,
                   "twE": 0,
                   "tweenFrame": true,
                   "bd_src": 1,
@@ -1156,7 +1156,7 @@
                   "cY": 1.0,
                   "kX": 0.0,
                   "kY": 0.0,
-                  "fi": 15,
+                  "fi": 22,
                   "twE": 0,
                   "tweenFrame": true,
                   "color": {
@@ -1465,10 +1465,6 @@
       "plistFile": ""
     }
   ],
-  "config_file_path": [
-    "enemy20.plist"
-  ],
-  "config_png_path": [
-    "enemy20.png"
-  ]
+  "config_file_path": [],
+  "config_png_path": []
 }

@@ -8,7 +8,7 @@
 #include "HUDLayer.h"
 #include "Background.h"
 
-class HelloWorld : public cocos2d::Layer
+class MainGame : public cocos2d::Layer
 {
 private:
 	static cocos2d::Scene* scene;
@@ -23,7 +23,7 @@ public:
     virtual bool init();
 
     // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+	CREATE_FUNC(MainGame);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

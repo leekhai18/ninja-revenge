@@ -13,10 +13,10 @@ Background* Background::inst(){
 
 void Background::setSpeed(float percent){
 	this->backgroundLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
-	this->houseLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
-	this->brigdeLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
+	this->houseLayer->setLayerSpeed(GROUND_SPEED*percent);
+	this->brigdeLayer->setLayerSpeed(GROUND_SPEED*percent);
 	this->rockLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
-	this->wallLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
+	this->wallLayer->setLayerSpeed(GROUND_SPEED*percent);
 }
 
 BackgroundLayer* Background::createBackground(){

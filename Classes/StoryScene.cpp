@@ -1,15 +1,15 @@
-#include "StoryLayer.h"
+#include "StoryScene.h"
 
-Scene* StoryLayer::createScene()
+Scene* Story::createScene()
 {
 	auto scene = Scene::create();
-	auto layer = StoryLayer::create();
+	auto layer = Story::create();
 	scene->addChild(layer);
 
 	return scene;
 }
 
-bool StoryLayer::init()
+bool Story::init()
 {
 	if (!Layer::init())
 	{
@@ -25,7 +25,7 @@ bool StoryLayer::init()
 	this->addChild(story);
 
 	//add event listener
-	story->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(StoryLayer::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	story->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Story::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 	//even touch
 	auto listener1 = EventListenerTouchOneByOne::create();
@@ -44,13 +44,13 @@ bool StoryLayer::init()
 	return true;
 }
 
-void StoryLayer::nextScene()
+void Story::nextScene()
 {
-	auto scene = HelloWorld::createScene();
+	auto scene = MainGame::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(1, scene, Color3B(0, 0, 0)));
 }
 
-void StoryLayer::animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)
+void Story::animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)
 {
 	if (movementType == MovementEventType::COMPLETE)
 	{

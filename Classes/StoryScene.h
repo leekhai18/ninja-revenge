@@ -1,15 +1,15 @@
-#ifndef _STORY_LAYER_H_
-#define _STORY_LAYER_H_
+#ifndef _STORY_SCENE_H_
+#define _STORY_SCENE_H_
 
 #include "cocos2d.h"
-#include "HelloWorldScene.h"
+#include "MainGameScene.h"
 #include "extensions/cocos-ext.h"
 #include "cocostudio/CocoStudio.h"
 
 USING_NS_CC;
 using namespace cocostudio;
 
-class StoryLayer : public Layer
+class Story : public Layer
 {
 private:
 
@@ -22,7 +22,7 @@ public:
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
 
-	CREATE_FUNC(StoryLayer);
+	CREATE_FUNC(Story);
 };
 
 #endif

@@ -1,7 +1,8 @@
 #ifndef __BACKGROUND_H__
 #define __BACKGROUND_H__
 
-#define BACKGROUND_SPEED 696.69f
+#define BACKGROUND_SPEED	200.69f
+#define GROUND_SPEED		500
 
 #include "cocos2d.h"
 #include "WallLayer.h"

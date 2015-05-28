@@ -16,11 +16,13 @@
 USING_NS_CC;
 using namespace cocostudio;
 
+#define ENEMY_SPEED 500
 
 class Enemy : public Armature
 {
 private:
-
+	bool		hasSlash = false;
+	bool		isDie = false;
 public:
 	//static create method
 	static Enemy* create(ENEMY_TYPE _type);
