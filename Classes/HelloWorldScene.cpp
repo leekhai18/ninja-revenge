@@ -40,7 +40,7 @@ bool HelloWorld::init()
 	ground->setContactTestBitmask(true);
 	auto groundNode = Node::create();
 	groundNode->setTag(OBJECT_TAG::GROUND_TAG);
-	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y));
+	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y-20));
 	groundNode->setPhysicsBody(ground);
 	this->addChild(groundNode);
 

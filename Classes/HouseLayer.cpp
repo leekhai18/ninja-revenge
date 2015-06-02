@@ -40,7 +40,7 @@ bool HouseLayer::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	int rand = random(0, 5);
+	int rand = random(1, 5);
 	this->addHouse(rand);
 
 	this->scheduleUpdate();
@@ -50,7 +50,7 @@ bool HouseLayer::init()
 
 void HouseLayer::update(float delta){
 	if (house->getPosition().x < - house->getContentSize().width){
-		this->addHouse(random(0, 5));
+		this->addHouse(random(1, 5));
 	}
 	else{
 		house->setPosition(house->getPosition().x - delta*layerSpeed, house->getPosition().y);
@@ -60,7 +60,7 @@ void HouseLayer::update(float delta){
 
 void HouseLayer::addHouse(int rand){
 	this->removeChild(house);
-
+	rand = 0;
 	int pos = random(0, 1000);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	std::string path;
@@ -81,9 +81,29 @@ void HouseLayer::addHouse(int rand){
 	}
 	
 	house = Sprite::create(path);
+	
+	//cocos2d::Vec2* points = new cocos2d::Vec2();
+	//points->
+	b2Vec2 vertices[8];
+	vertices[0].Set(0, 10);
+	vertices[1].Set(0, 20);
+	vertices[2].Set(0, 30);
+	vertices[3].Set(0, 40);
+	vertices[4].Set(10, 0);
+	vertices[5].Set(20, 0);
+	vertices[6].Set(0, 70);
+	vertices[7].Set(0, 80);
+	if (rand == 0){
+		auto body = PhysicsBody::createPolygon(vertices, PhysicsMaterial(1, 0, 0));
+		body->setRotationEnable(false);
+		body->setCollisionBitmask(5);
+		body->setContactTestBitmask(true);
+		body->setDynamic(false);
+		house->setPhysicsBody(body);
+	}
 
 
 	house->setScale(scaleFactor);
-	house->setPosition(pos + visibleSize.width + house->getContentSize().width / 2, WALL_HEIGHT + diff);
+	house->setPosition(pos + visibleSize.width -500 +house->getContentSize().width / 2, WALL_HEIGHT + diff);
 	this->addChild(house);
 }

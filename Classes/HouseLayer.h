@@ -1,8 +1,6 @@
 #ifndef __HOUSE_LAYER_H__
 #define __HOUSE_LAYER_H__
 
-//#define ROCK_WIDTH 272
-//#define ROCK_HEIGHT 235
 #define SCALE_FACTOR 2.0f
 
 #define HOUSE_1_PATH "house layer\\house_1.png"
@@ -20,7 +18,7 @@
 #include "WallLayer.h"
 #include "BrigdeLayer.h"
 #include "BackgroundTemplate.h"
-
+#include "Box2D\Box2D.h"
 class HouseLayer : public BackgroundTemplate
 {
 private: 
@@ -30,6 +28,7 @@ private:
 	void addHouse(int rand);
 public:
 	static HouseLayer* inst();
+
 	cocos2d::Scene* createScene() override;
 	bool init() override;
 	void update(float delta) override;

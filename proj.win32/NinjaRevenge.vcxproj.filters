@@ -10,6 +10,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Background">
+      <UniqueIdentifier>{e8b7b0ff-2522-4bee-8ddf-4cbec3667fe3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,26 +30,26 @@
     <ClCompile Include="..\Classes\Global.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BackgroundLayer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\RockLayer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\WallLayer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BrigdeLayer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HouseLayer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Background.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundLayer.cpp">
+      <Filter>src\Background</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BackgroundTemplate.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BrigdeLayer.cpp">
+      <Filter>src\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HouseLayer.cpp">
+      <Filter>src\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RockLayer.cpp">
+      <Filter>src\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WallLayer.cpp">
+      <Filter>src\Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,26 +68,26 @@
     <ClInclude Include="..\Classes\Global.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BackgroundLayer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RockLayer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\WallLayer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BrigdeLayer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HouseLayer.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Background.h">
-      <Filter>src</Filter>
+      <Filter>src\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackgroundLayer.h">
+      <Filter>src\Background</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundTemplate.h">
-      <Filter>src</Filter>
+      <Filter>src\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BrigdeLayer.h">
+      <Filter>src\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HouseLayer.h">
+      <Filter>src\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RockLayer.h">
+      <Filter>src\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WallLayer.h">
+      <Filter>src\Background</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
