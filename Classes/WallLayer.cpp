@@ -1,4 +1,5 @@
 #include "WallLayer.h"
+#include "Global.h"
 
 USING_NS_CC;
 
@@ -51,7 +52,7 @@ bool WallLayer::init()
 	for (int i = 0; i < N_GROUND; i++){
 		Sprite* ground = Sprite::create("wall layer\\ground.png");
 		ground->setPosition(Point((i)*GROUND_WIDTH, GROUND_HEIGHT/2));
-		ground->setTag(i+ N_WALL);
+		ground->setTag(i+ N_WALL);		
 		grounds.push_back(ground);
 		this->addChild(ground);
 	}
@@ -65,13 +66,13 @@ void WallLayer::update(float delta){
 	for (auto &wall : walls){
 		if (wall->getPosition().x < - WALL_WIDTH){
 			int tag = wall->getTag() == 0 ? N_WALL - 1 : wall->getTag() - 1;
-			wall->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + WALL_WIDTH - layerSpeed*delta,
+			wall->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + WALL_WIDTH - (layerSpeed - 50)*delta,
 				wall->getPosition().y));
 		}
 		else
 			wall->setPosition(Vec2(wall->getPosition().x - layerSpeed*delta, wall->getPosition().y));
 	}
-
+	
 	for (auto &ground : grounds){
 		if (ground->getPosition().x < - GROUND_WIDTH){
 			int tag = ground->getTag() == N_WALL ? N_WALL + N_GROUND - 1 : ground->getTag() - 1;

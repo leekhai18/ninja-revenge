@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "extensions/cocos-ext.h"
 #include "cocostudio/CocoStudio.h"
+#include "Global.h"
 
 #if ENABLE_PHYSICS_BOX2D_DETECT
 #include "../../Box2DTestBed/GLES-Render.h"
@@ -15,21 +16,15 @@
 USING_NS_CC;
 using namespace cocostudio;
 
-enum ESTATE
-{
-	RUN = 0,
-	JUMP,
-	JUMP2,
-	DIE,
-	ATTACK
-};
+#define	PLAYER_JUMP_SPEED 650
+#define PLAYER_SLASH_DELAY 1.0f
 
 class Player : public Armature
 {
 private:
 	//ESTATE		state;
 	bool		isJumping;
-
+	float		timeDelayAttack;
 public:
 	//static create method
 	static Player* create();

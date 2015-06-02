@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Global.h"
+#include "Enemy.h"
 
 Player::Player() : Armature(), isJumping(false)
 {
@@ -31,6 +32,7 @@ Player* Player::create()
 bool Player::initPlayer()
 {
 	this->setTag(OBJECT_TAG::PLAYER_TAG);
+	this->setName("Player");
 
 	//add event listener
 	this->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Player::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
@@ -54,6 +56,10 @@ bool Player::initPlayer()
 void Player::update(float dt)
 {
 	Armature::update(dt);
+	if (timeDelayAttack > 0)
+	{
+		timeDelayAttack -= dt;
+	}	
 }
 
 void Player::run()
@@ -66,7 +72,7 @@ void Player::jump()
 {
 	if (!isJumping && state == ESTATE::RUN) {
 		auto vel = getPhysicsBody()->getVelocity();
-		vel.y = 450;
+		vel.y = PLAYER_JUMP_SPEED;	
 		getPhysicsBody()->setVelocity(vel);
 		this->getAnimation()->play("Jump");		
 		this->setState(ESTATE::JUMP);
@@ -76,7 +82,7 @@ void Player::jump()
 	{
 		if (isJumping && state == ESTATE::JUMP) {
 			auto vel = getPhysicsBody()->getVelocity();
-			vel.y = 450;
+			vel.y = PLAYER_JUMP_SPEED;
 			getPhysicsBody()->setVelocity(vel);
 			this->getAnimation()->play("Jump2");
 			this->setState(ESTATE::JUMP2);			
@@ -86,8 +92,12 @@ void Player::jump()
 
 void Player::attack()
 {
-	this->getAnimation()->play("Attack");
-	this->setState(ESTATE::ATTACK);
+	if (timeDelayAttack <= 0)
+	{
+		timeDelayAttack = PLAYER_SLASH_DELAY;
+		this->getAnimation()->play("Attack");
+		this->setState(ESTATE::ATTACK);
+	}
 }
 
 void Player::die()
@@ -116,11 +126,25 @@ bool Player::onContactBegin(PhysicsContact& contact)
 	auto a = contact.getShapeA()->getBody()->getNode();
 	auto b = contact.getShapeB()->getBody()->getNode();
 	
-	CCLOG("onContactBegin: %d vs %d", a->getTag(), b->getTag());
-	if (a->getTag() == OBJECT_TAG::GROUND_TAG || b->getTag() == OBJECT_TAG::GROUND_TAG)
+	if ((a->getName().compare("Ground") == 0 && b->getName().compare("Player") == 0) || 
+		(b->getName().compare("Ground") == 0 && a->getName().compare("Player") == 0) )
 	{
 		isJumping = false;
 		this->run();
+	}
+
+	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto e = (Enemy*)b;
+		e->die();
+		return false;
+	}
+
+	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto e = (Enemy*)a;
+		e->die();
+		return false;
 	}
 	//bodies can collide
 	return true;

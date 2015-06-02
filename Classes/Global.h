@@ -2,7 +2,7 @@
 #define _GLOBAL_H_
 
 //define some config (don't use too much)
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 enum OBJECT_BISMASK
 {
@@ -20,6 +20,23 @@ enum OBJECT_TAG
 	ENEMY_TAG,
 	KURENAI_TAG,
 	ARROW_TAG
+};
+
+enum ESTATE
+{
+	RUN = 0,
+	JUMP,
+	JUMP2,
+	DIE,
+	ATTACK,
+	IDLE
+};
+
+enum ENEMY_TYPE
+{
+	ENEMY1,
+	ENEMY2,
+	ENEMY3
 };
 
 class Global
