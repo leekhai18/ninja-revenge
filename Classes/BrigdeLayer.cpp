@@ -1,4 +1,5 @@
 #include "BrigdeLayer.h"
+#include "MyBodyParser.h"
 
 USING_NS_CC;
 BrigdeLayer* BrigdeLayer::instance = NULL;
@@ -60,6 +61,17 @@ void BrigdeLayer::update(float delta){
 
 void BrigdeLayer::addBrigde(float xLocation){
 	brigde = Sprite::create(BRIGDE_FRONT_1_PATH);
+	/*MyBodyParser::getInstance()->parseJsonFile("house layer\\bridge.json");
+	auto body = MyBodyParser::getInstance()->bodyFormJson(brigde, "bridge", PhysicsMaterial(0, 0, 0));
+	if (body != nullptr)
+	{
+		this->setPhysicsBody(body);
+	}
+	else
+	{
+		auto rectBody = PhysicsBody::createBox(Size(200, 30), PhysicsMaterial(0, 0, 0));
+		this->setPhysicsBody(rectBody);
+	}*/
 	brigde->setPosition(xLocation + brigde->getContentSize().width/2, BRIGDE_FRONT_1_HEIGHT / 2);
 	this->addChild(brigde);
 }

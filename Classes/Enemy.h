@@ -42,7 +42,6 @@ public:
 
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
-	bool onContactBegin(PhysicsContact& contact);
 };
 
 #endif

@@ -66,11 +66,11 @@ void WallLayer::update(float delta){
 	for (auto &wall : walls){
 		if (wall->getPosition().x < - WALL_WIDTH){
 			int tag = wall->getTag() == 0 ? N_WALL - 1 : wall->getTag() - 1;
-			wall->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + WALL_WIDTH - (layerSpeed - 50)*delta,
+			wall->setPosition(Vec2(this->getChildByTag(abs(tag))->getPosition().x + WALL_WIDTH - (layerSpeed - 150)*delta,
 				wall->getPosition().y));
 		}
 		else
-			wall->setPosition(Vec2(wall->getPosition().x - layerSpeed*delta, wall->getPosition().y));
+			wall->setPosition(Vec2(wall->getPosition().x - (layerSpeed - 150)*delta, wall->getPosition().y));
 	}
 	
 	for (auto &ground : grounds){
