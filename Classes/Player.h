@@ -50,6 +50,8 @@ public:
 	void setHold(bool val);
 	void attack();
 	void die();
+	void flashUp();
+	void flashDown();
 
 	void dirtPlay();
 

@@ -87,11 +87,13 @@ void HUDLayer::update(float dt)
 		if (initTouchPos.y - currentTouchPos.y > visibleSize.width * 0.05f)
 		{
 			CCLOG("SWIPED DOWN");
+			player->flashDown();
 			isTouchDown = false;
 		}
 		else if (initTouchPos.y - currentTouchPos.y < -visibleSize.width * 0.05f)
 		{
 			CCLOG("SWIPED UP");
+			player->flashUp();
 			isTouchDown = false;
 		}
 	}

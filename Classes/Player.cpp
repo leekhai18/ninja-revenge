@@ -120,7 +120,10 @@ void Player::attack()
 	if (timeDelayAttack <= 0)
 	{
 		timeDelayAttack = PLAYER_SLASH_DELAY;
-		this->getAnimation()->play("Attack");
+		int rand = random(1, 2);
+		std::string animName = "Attack";
+		std::string number = std::to_string(rand);
+		this->getAnimation()->play(animName + number);
 		this->setState(ESTATE::ATTACK);
 	}
 }
@@ -129,6 +132,16 @@ void Player::die()
 {
 	this->getAnimation()->play("Die");
 	this->setState(ESTATE::DIE);
+}
+
+void Player::flashUp()
+{
+	this->getAnimation()->play("FlashUp");
+}
+
+void Player::flashDown()
+{
+	this->getAnimation()->play("FlashDown");
 }
 
 void Player::dirtPlay()
@@ -144,13 +157,17 @@ void Player::animationEvent(Armature *armature, MovementEventType movementType, 
 {
 	if (movementType == MovementEventType::COMPLETE)
 	{
-		if (movementID == "Attack")
+		if (movementID == "Attack1" || movementID == "Attack2")
 		{
 			this->run();
 		}
-		else if (movementID == "Jump")
+		else if (movementID == "FlashUp")
 		{
-			
+			this->run();
+		}
+		else if (movementID == "FlashDown")
+		{
+			this->run();
 		}
 	}
 }
