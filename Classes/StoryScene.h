@@ -1,6 +1,8 @@
 #ifndef _STORY_SCENE_H_
 #define _STORY_SCENE_H_
 
+#define  BUTTON_SKIP_PATH "b_skip.png"
+
 #include "cocos2d.h"
 #include "MainGameScene.h"
 #include "extensions/cocos-ext.h"
@@ -21,6 +23,9 @@ public:
 	void nextScene();
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
+
+
+	void menuSkipCallback(cocos2d::Ref* pSender);
 
 	CREATE_FUNC(Story);
 };

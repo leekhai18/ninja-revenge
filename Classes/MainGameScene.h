@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Global.h"
 #include "HUDLayer.h"
+#include "StoryScene.h"
 #include "Background.h"
 
 class MainGame : public cocos2d::Layer

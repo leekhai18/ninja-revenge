@@ -13,6 +13,9 @@
     <Filter Include="src\Background">
       <UniqueIdentifier>{e8b7b0ff-2522-4bee-8ddf-4cbec3667fe3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MainMenu">
+      <UniqueIdentifier>{f2f77732-d265-427f-8dd8-2414f332fb0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,6 +63,9 @@
     <ClCompile Include="..\Classes\StoryScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MainMenuScene.cpp">
+      <Filter>src\MainMenu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -106,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\StoryScene.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenuScene.h">
+      <Filter>src\MainMenu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

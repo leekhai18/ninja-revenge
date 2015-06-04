@@ -84,23 +84,23 @@ void HouseLayer::addHouse(int rand){
 	
 	//cocos2d::Vec2* points = new cocos2d::Vec2();
 	//points->
-	b2Vec2 vertices[8];
-	vertices[0].Set(0, 10);
-	vertices[1].Set(0, 20);
-	vertices[2].Set(0, 30);
-	vertices[3].Set(0, 40);
-	vertices[4].Set(10, 0);
-	vertices[5].Set(20, 0);
-	vertices[6].Set(0, 70);
-	vertices[7].Set(0, 80);
-	if (rand == 0){
-		auto body = PhysicsBody::createPolygon(vertices, PhysicsMaterial(1, 0, 0));
-		body->setRotationEnable(false);
-		body->setCollisionBitmask(5);
-		body->setContactTestBitmask(true);
-		body->setDynamic(false);
-		house->setPhysicsBody(body);
-	}
+	//b2Vec2 vertices[8];
+	//vertices[0].Set(0, 10);
+	//vertices[1].Set(0, 20);
+	//vertices[2].Set(0, 30);
+	//vertices[3].Set(0, 40);
+	//vertices[4].Set(10, 0);
+	//vertices[5].Set(20, 0);
+	//vertices[6].Set(0, 70);
+	//vertices[7].Set(0, 80);
+	//if (rand == 0){
+	//	auto body = PhysicsBody::createPolygon(vertices, PhysicsMaterial(1, 0, 0));
+	//	body->setRotationEnable(false);
+	//	body->setCollisionBitmask(5);
+	//	body->setContactTestBitmask(true);
+	//	body->setDynamic(false);
+	//	house->setPhysicsBody(body);
+	//}
 
 
 	house->setScale(scaleFactor);

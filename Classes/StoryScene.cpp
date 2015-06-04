@@ -19,6 +19,15 @@ bool Story::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	//quest button
+	auto skipItem = MenuItemImage::create(
+		BUTTON_SKIP_PATH,
+		BUTTON_SKIP_PATH,
+		CC_CALLBACK_1(Story::menuSkipCallback, this));
+	auto menu = Menu::create(skipItem, NULL);
+	menu->setPosition(visibleSize.width - skipItem->getContentSize().width, skipItem->getContentSize().height*2);
+	this->addChild(menu, 1000);
+
 	auto story = Armature::create("story");
 	story->setPosition(visibleSize.width * 0.5f + origin.x, visibleSize.height * 0.5f + origin.y);
 	story->getAnimation()->play("Appear");
@@ -59,4 +68,9 @@ void Story::animationEvent(Armature *armature, MovementEventType movementType, c
 			this->nextScene();
 		}
 	}
+}
+
+void Story::menuSkipCallback(Ref* pSender)
+{
+	this->nextScene();
 }

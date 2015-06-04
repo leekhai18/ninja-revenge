@@ -42,12 +42,9 @@ bool MainGame::init()
 
 	auto groundNode = Node::create();
 	groundNode->setTag(OBJECT_TAG::GROUND_TAG);
-<<<<<<< HEAD:Classes/HelloWorldScene.cpp
 	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y-20));
-=======
 	groundNode->setName("Ground");
 	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y));
->>>>>>> d8573e02172960701c75758f2971b334a3c050ce:Classes/MainGameScene.cpp
 	groundNode->setPhysicsBody(ground);
 	this->addChild(groundNode);	
 

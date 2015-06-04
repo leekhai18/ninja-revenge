@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "StoryScene.h"
+#include "MainMenuScene.h"
 
 USING_NS_CC;
 
@@ -54,7 +54,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	searchPaths.push_back("hd/animations");
 	searchPaths.push_back("hd/sprites");
 	searchPaths.push_back("x2");
-
+	searchPaths.push_back("sound");
+	
 	fileUtils->setSearchPaths(searchPaths);
 
 	//init armature resource
@@ -66,7 +67,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = Story::createScene();
+    auto scene = MainMenuScene::createScene();
 
     // run
     director->runWithScene(scene);
