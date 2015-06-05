@@ -63,6 +63,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("enemy1/enemy1.ExportJson");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("enemy2/enemy2.ExportJson");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("story/story.ExportJson");
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("dirt/dirt.ExportJson");
+
 	//director->setContentScaleFactor(0.50f);
     register_all_packages();
 

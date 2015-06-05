@@ -152,6 +152,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\HouseLayer.cpp" />
     <ClCompile Include="..\Classes\HUDLayer.cpp" />
     <ClCompile Include="..\Classes\MainMenuScene.cpp" />
+    <ClCompile Include="..\Classes\MyBodyParser.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\RockLayer.cpp" />
     <ClCompile Include="..\Classes\SoundManager.cpp" />
@@ -170,7 +171,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\MainGameScene.h" />
     <ClInclude Include="..\Classes\HouseLayer.h" />
     <ClInclude Include="..\Classes\HUDLayer.h" />
+
     <ClInclude Include="..\Classes\MainMenuScene.h" />
+
+    <ClInclude Include="..\Classes\MyBodyParser.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\RockLayer.h" />
     <ClInclude Include="..\Classes\SoundManager.h" />

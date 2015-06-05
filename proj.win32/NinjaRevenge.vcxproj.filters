@@ -67,6 +67,7 @@
       <Filter>src\MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SoundManager.cpp">
+    <ClCompile Include="..\Classes\MyBodyParser.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -120,6 +121,7 @@
       <Filter>src\MainMenu</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SoundManager.h">
+    <ClInclude Include="..\Classes\MyBodyParser.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

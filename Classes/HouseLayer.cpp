@@ -1,4 +1,5 @@
 #include "HouseLayer.h"
+#include "Global.h"
 
 USING_NS_CC;
 HouseLayer* HouseLayer::instance = NULL;
@@ -48,6 +49,19 @@ bool HouseLayer::init()
 	return true;
 }
 
+Node* HouseLayer::createOneWayNode(float width, float height)
+{
+	Node* node = Node::create();
+	auto body = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(0, 0, 0));
+	body->setRotationEnable(false);
+	body->setDynamic(false);
+	body->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
+	body->setContactTestBitmask(true);
+	node->setPhysicsBody(body);
+	node->setName("Ground");
+	return node;
+}
+
 void HouseLayer::update(float delta){
 	if (house->getPosition().x < - house->getContentSize().width){
 		this->addHouse(random(1, 5));
@@ -65,43 +79,61 @@ void HouseLayer::addHouse(int rand){
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	std::string path;
 	float diff, scaleFactor;
-
+	Node* child1;
+	Node* child2;
+	
 	//these diff only work when the scale factor is 2.0f
 	switch (rand){
 	case 0: {
 				path = BRIGDE_BACK_1_PATH; diff = BRIGDE_BACK_1_HEIGHT / 2 - WALL_HEIGHT; scaleFactor = 1.0f;
-				BrigdeLayer::inst()->addBrigde(pos + +visibleSize.width); break;
+				BrigdeLayer::inst()->addBrigde(pos + +visibleSize.width); 
+				house = Sprite::create(path);
+				break;
 	}
 				
-	case 1: path = HOUSE_1_PATH; diff = 90; scaleFactor = SCALE_FACTOR;  break;
-	case 2: path = HOUSE_2_PATH; diff = 90; scaleFactor = SCALE_FACTOR; break;
-	case 3: path = HOUSE_3_PATH; diff = 50; scaleFactor = SCALE_FACTOR; break;
-	case 4: path = HOUSE_4_PATH; diff = -20; scaleFactor = SCALE_FACTOR; break;
-	case 5: path = HOUSE_5_PATH; diff = -20; scaleFactor = SCALE_FACTOR; break;
-	}
-	
-	house = Sprite::create(path);
-	
-	//cocos2d::Vec2* points = new cocos2d::Vec2();
-	//points->
-	//b2Vec2 vertices[8];
-	//vertices[0].Set(0, 10);
-	//vertices[1].Set(0, 20);
-	//vertices[2].Set(0, 30);
-	//vertices[3].Set(0, 40);
-	//vertices[4].Set(10, 0);
-	//vertices[5].Set(20, 0);
-	//vertices[6].Set(0, 70);
-	//vertices[7].Set(0, 80);
-	//if (rand == 0){
-	//	auto body = PhysicsBody::createPolygon(vertices, PhysicsMaterial(1, 0, 0));
-	//	body->setRotationEnable(false);
-	//	body->setCollisionBitmask(5);
-	//	body->setContactTestBitmask(true);
-	//	body->setDynamic(false);
-	//	house->setPhysicsBody(body);
-	//}
+	case 1: 
+		path = HOUSE_1_PATH; diff = 90; scaleFactor = SCALE_FACTOR;
+		house = Sprite::create(path);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.77);
+		child2 = createOneWayNode(house->boundingBox().size.width * 0.69f, visibleSize.height * 0.02f);
+		child2->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.4);
+		house->addChild(child1);
+		house->addChild(child2);
+		break;
+	case 2: 
+		path = HOUSE_2_PATH; diff = 90; scaleFactor = SCALE_FACTOR; 
+		house = Sprite::create(path);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.75);
+		
+		house->addChild(child1);
+		break;
+	case 3: 
+		path = HOUSE_3_PATH; diff = 50; scaleFactor = SCALE_FACTOR; 
+		house = Sprite::create(path);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.7);
 
+		house->addChild(child1);
+		break;
+	case 4: 
+		path = HOUSE_4_PATH; diff = -20; scaleFactor = SCALE_FACTOR; 
+		house = Sprite::create(path);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.7);
+
+		house->addChild(child1);
+		break;
+	case 5: 
+		path = HOUSE_5_PATH; diff = -20; scaleFactor = SCALE_FACTOR; 
+		house = Sprite::create(path);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.7);
+
+		house->addChild(child1);
+		break;
+	}
 
 	house->setScale(scaleFactor);
 	house->setPosition(pos + visibleSize.width -500 +house->getContentSize().width / 2, WALL_HEIGHT + diff);

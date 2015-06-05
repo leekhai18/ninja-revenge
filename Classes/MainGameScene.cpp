@@ -1,4 +1,5 @@
 #include "MainGameScene.h"
+#include "MyBodyParser.h"
 
 USING_NS_CC;
 
@@ -7,6 +8,7 @@ Scene* MainGame::createScene()
     // 'scene' is an autorelease object
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setGravity(Vec2(0, -980));
+	scene->getPhysicsWorld()->setSpeed(1.5f);
 	if (DEBUG_MODE)
 		scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
@@ -38,7 +40,6 @@ bool MainGame::init()
 	ground->setDynamic(false);
 	ground->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
 	ground->setContactTestBitmask(true);
-	ground->setCategoryBitmask(0x01);
 
 	auto groundNode = Node::create();
 	groundNode->setTag(OBJECT_TAG::GROUND_TAG);
@@ -70,33 +71,31 @@ bool MainGame::init()
 	enemy2->setPosition(Vec2(visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y));
 	this->addChild(enemy2);
 
+	/*auto bridge = Sprite::create("house layer\\bridge_front1.png");
+	MyBodyParser::getInstance()->parseJsonFile("house layer\\bridge.json");
+	auto body = MyBodyParser::getInstance()->bodyFormJson(bridge, "bridge", PhysicsMaterial(0, 0, 0));
+	body->setRotationEnable(false);	
+	body->setDynamic(false);
+	body->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
+	body->setContactTestBitmask(true);
+	bridge->setName("Ground");
+
+	if (body != nullptr)
+	{
+		bridge->setPhysicsBody(body);
+	}
+	else
+	{
+		auto rectBody = PhysicsBody::createBox(Size(200, 30), PhysicsMaterial(0, 0, 0));		
+		bridge->setPhysicsBody(rectBody);
+	}
+	bridge->setPosition(Vec2(visibleSize.width, 100));
+	bridge->runAction(MoveBy::create(5, Vec2(-1000, 0)));
+	this->addChild(bridge);*/
+
 	HUDLayer* hud = HUDLayer::create();
 	hud->setPlayer(player);
 	this->addChild(hud);
-
-	//event
-	//  Create a "one by one" touch event listener
-	// (processes one touch at a time)
-	auto listener1 = EventListenerTouchOneByOne::create();
-
-	// trigger when you push down
-	listener1->onTouchBegan = [](Touch* touch, Event* event){
-		// your code
-		return true; // if you are consuming it
-	};
-
-	// trigger when moving touch
-	listener1->onTouchMoved = [](Touch* touch, Event* event){
-		// your code
-	};
-
-	// trigger when you let up
-	listener1->onTouchEnded = [=](Touch* touch, Event* event){
-		player->jump();
-	};
-
-	// Add listener
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener1, this);
     
     return true;
 }

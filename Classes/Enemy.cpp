@@ -36,17 +36,11 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 	this->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Enemy::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
 	//add physic body
-	auto body = PhysicsBody::createBox(this->getBoundingBox().size, PhysicsMaterial(1, 0, 0));
+	auto body = PhysicsBody::createBox(Size(this->getBoundingBox().size.width * 1.8f, this->getBoundingBox().size.height), PhysicsMaterial(1, 0, 0));
 	body->setRotationEnable(false);
 	body->setCollisionBitmask(OBJECT_BISMASK::ENEMY_MASK);
-	//body->setCategoryBitmask(0x02);
 	body->setContactTestBitmask(true);
 	this->setPhysicsBody(body);
-
-	//add collision detetion
-	//auto contactListener = EventListenerPhysicsContact::create();
-	//contactListener->onContactBegin = CC_CALLBACK_1(Enemy::onContactBegin, this);
-	//_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	return true;
 }
@@ -106,16 +100,3 @@ void Enemy::animationEvent(Armature *armature, MovementEventType movementType, c
 	}
 }
 
-bool Enemy::onContactBegin(PhysicsContact& contact)
-{
-	auto a = contact.getShapeA()->getBody()->getNode();
-	auto b = contact.getShapeB()->getBody()->getNode();
-
-	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG) || (b->getTag() == OBJECT_TAG::PLAYER_TAG  && a->getTag() == OBJECT_TAG::ENEMY_TAG))
-	{
-		this->die();
-		return false;
-	}
-	//bodies can  collide
-	return true;
-}

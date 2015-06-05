@@ -2,7 +2,7 @@
 #define _GLOBAL_H_
 
 //define some config (don't use too much)
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 
 enum OBJECT_BISMASK
 {
@@ -29,7 +29,10 @@ enum ESTATE
 	JUMP2,
 	DIE,
 	ATTACK,
-	IDLE
+	IDLE,
+	SKILL1,
+	SKILL2,
+	SKILL3
 };
 
 enum ENEMY_TYPE

@@ -16,8 +16,9 @@
 USING_NS_CC;
 using namespace cocostudio;
 
-#define	PLAYER_JUMP_SPEED 650
-#define PLAYER_SLASH_DELAY 1.0f
+#define	PLAYER_JUMP_SPEED		450
+#define PLAYER_SLASH_DELAY		0.7f
+#define PLAYER_TIME_HOLDING		0.3f
 
 class Player : public Armature
 {
@@ -25,6 +26,8 @@ private:
 	//ESTATE		state;
 	bool		isJumping;
 	float		timeDelayAttack;
+	bool		isHolding;
+	float		timeHolding;
 public:
 	//static create method
 	static Player* create();
@@ -44,12 +47,19 @@ public:
 	//behavior
 	void run();
 	void jump();
+	void setHold(bool val);
 	void attack();
 	void die();
+	void flashUp();
+	void flashDown();
+
+	void dirtPlay();
 
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
 	bool onContactBegin(PhysicsContact& contact);
+
+	void destroyCallback(Node* node);
 };
 
 #endif
