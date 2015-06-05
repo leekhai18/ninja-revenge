@@ -112,11 +112,10 @@ bool MainMenuScene::init()
 	this->addChild(menu, 1);
 
 	this->createTable();
-	this->showTable();
 
-	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-	//audio->playBackgroundMusic("theme.wav", true); 
+	SoundManager::inst()->playBackgroundTheme(true);
 
+	//this->showTable();
 
 	return true;
 }
@@ -131,11 +130,8 @@ void MainMenuScene::updateStartButton(CCNode* sender){
 
 void MainMenuScene::menuPlayCallback(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
-	return;
-#endif
 	auto storyScene = Story::createScene();
+	SoundManager::inst()->stopBackgroundTheme();
 	Director::getInstance()->replaceScene(storyScene);
 }
 

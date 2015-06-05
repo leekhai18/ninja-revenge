@@ -72,5 +72,6 @@ void Story::animationEvent(Armature *armature, MovementEventType movementType, c
 
 void Story::menuSkipCallback(Ref* pSender)
 {
+	SoundManager::inst()->playClickEffect();
 	this->nextScene();
 }

@@ -4,6 +4,7 @@
 #define  BUTTON_SKIP_PATH "b_skip.png"
 
 #include "cocos2d.h"
+#include "SoundManager.h"
 #include "MainGameScene.h"
 #include "extensions/cocos-ext.h"
 #include "cocostudio/CocoStudio.h"

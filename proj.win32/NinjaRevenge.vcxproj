@@ -154,6 +154,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\MainMenuScene.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\RockLayer.cpp" />
+    <ClCompile Include="..\Classes\SoundManager.cpp" />
     <ClCompile Include="..\Classes\StoryScene.cpp" />
     <ClCompile Include="..\Classes\WallLayer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -172,6 +173,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\MainMenuScene.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\RockLayer.h" />
+    <ClInclude Include="..\Classes\SoundManager.h" />
     <ClInclude Include="..\Classes\StoryScene.h" />
     <ClInclude Include="..\Classes\WallLayer.h" />
     <ClInclude Include="main.h" />

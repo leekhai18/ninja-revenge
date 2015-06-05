@@ -18,7 +18,7 @@
 
 #include "cocos2d.h"
 #include "StoryScene.h"
-#include "SimpleAudioEngine.h"
+#include "SoundManager.h"
 
 USING_NS_CC;
 
