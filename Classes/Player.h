@@ -28,6 +28,12 @@ private:
 	float		timeDelayAttack;
 	bool		isHolding;
 	float		timeHolding;
+
+	float		flashPositionY;
+	bool		canFlash;
+	bool		isOnGround;
+	float		groundPosition;
+
 public:
 	//static create method
 	static Player* create();
@@ -58,6 +64,7 @@ public:
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
 	bool onContactBegin(PhysicsContact& contact);
+	void onContactSeperate(PhysicsContact& contact);
 
 	void destroyCallback(Node* node);
 };

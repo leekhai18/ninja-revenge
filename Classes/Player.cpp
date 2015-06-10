@@ -2,7 +2,7 @@
 #include "Global.h"
 #include "Enemy.h"
 
-Player::Player() : Armature(), isJumping(false)
+Player::Player() : Armature(), isJumping(false), canFlash(false), flashPositionY(0), isOnGround(false), groundPosition(0)
 {
 	
 }
@@ -34,6 +34,9 @@ bool Player::initPlayer()
 	this->setTag(OBJECT_TAG::PLAYER_TAG);
 	this->setName("Player");
 
+	this->getAnimation()->play("Jump2");
+	this->setState(ESTATE::JUMP2);
+
 	//add event listener
 	this->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_0(Player::animationEvent, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
@@ -47,7 +50,9 @@ bool Player::initPlayer()
 	//add collision detetion
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Player::onContactBegin, this);
+	contactListener->onContactSeperate = CC_CALLBACK_1(Player::onContactSeperate, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+
 
 	return true;
 
@@ -92,6 +97,8 @@ void Player::jump()
 		auto vel = getPhysicsBody()->getVelocity();
 		vel.y = PLAYER_JUMP_SPEED;	
 		getPhysicsBody()->setVelocity(vel);
+		getPhysicsBody()->setGravityEnable(true);
+		isOnGround = false;
 		this->getAnimation()->play("Jump");		
 		this->setState(ESTATE::JUMP);
 		isJumping = true;
@@ -136,12 +143,18 @@ void Player::die()
 
 void Player::flashUp()
 {
-	this->getAnimation()->play("FlashUp");
+	if (canFlash)
+	{
+		this->getAnimation()->play("FlashUp");
+	}
 }
 
 void Player::flashDown()
 {
-	this->getAnimation()->play("FlashDown");
+	if (canFlash)
+	{
+		this->getAnimation()->play("FlashDown");
+	}
 }
 
 void Player::dirtPlay()
@@ -164,10 +177,12 @@ void Player::animationEvent(Armature *armature, MovementEventType movementType, 
 		else if (movementID == "FlashUp")
 		{
 			this->run();
+			this->setPosition(this->getPosition().x, flashPositionY);
 		}
 		else if (movementID == "FlashDown")
 		{
 			this->run();
+			this->setPosition(Director::getInstance()->getVisibleSize()*0.1f);
 		}
 	}
 }
@@ -178,13 +193,18 @@ bool Player::onContactBegin(PhysicsContact& contact)
 	auto b = contact.getShapeB()->getBody()->getNode();
 	
 	// Check collision player with ground
-	if ((a->getName().compare("Ground") == 0 && b->getName().compare("Player") == 0))
+	if (a->getTag() == OBJECT_TAG::GROUND_TAG && b->getTag() == OBJECT_TAG::PLAYER_TAG)
 	{		
-		if (a->getPosition().y + a->getParent()->getPosition().y < b->getPosition().y)
+		if (a->getPosition().y + a->getParent()->getPosition().y < b->getPosition().y && isOnGround == false)
 		{
 			isJumping = false;
 			dirtPlay();
+			isOnGround = true;
+			if (groundPosition == 0)
+				groundPosition = this->getPositionY();
 			this->run();
+			this->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			this->getPhysicsBody()->setGravityEnable(false);
 			return true;
 		}
 		else
@@ -192,22 +212,50 @@ bool Player::onContactBegin(PhysicsContact& contact)
 			return false;
 		}		
 	}
-
-	if ((b->getName().compare("Ground") == 0 && a->getName().compare("Player") == 0))
+	
+	if (b->getTag() == OBJECT_TAG::GROUND_TAG && a->getTag() == OBJECT_TAG::PLAYER_TAG && isOnGround == false)
 	{
-		CCLOG("Ground Y: %f", b->getPosition().y + b->getParent()->getPosition().y);
-		CCLOG("Player Y: %f", a->getPosition().y);
-		if (b->getPosition().y + b->getParent()->getPosition().y< a->getPosition().y)
+		if (b->getPosition().y + b->getParent()->getPosition().y < a->getPosition().y)
 		{
 			isJumping = false;
 			dirtPlay();
+			isOnGround = true;
+			if (groundPosition == 0)
+				groundPosition = this->getPositionY();
 			this->run();
+			this->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			this->getPhysicsBody()->setGravityEnable(false);
 			return true;
 		}
 		else
 		{
 			return false;
 		}
+	}
+
+	// Check collision player with house
+	if (a->getTag() == OBJECT_TAG::HOUSE_TAG)
+	{	
+		CCLOG("HAIZ %f", a->getBoundingBox().size.height);
+		if (b->getTag() == OBJECT_TAG::PLAYER_TAG)
+		{
+			canFlash = true;
+			flashPositionY = a->boundingBox().size.height;
+			
+		}
+		return false;
+	}
+
+	if (b->getTag() == OBJECT_TAG::HOUSE_TAG)
+	{
+		CCLOG("HAIZ %f", a->getBoundingBox().size.height);
+		if (a->getTag() == OBJECT_TAG::PLAYER_TAG)
+		{
+			canFlash = true;
+			flashPositionY = b->boundingBox().size.height;
+			
+		}
+		return false;
 	}
 
 	// Check collision with enemy
@@ -238,6 +286,50 @@ bool Player::onContactBegin(PhysicsContact& contact)
 
 	//bodies can collide
 	return true;
+}
+
+void Player::onContactSeperate(PhysicsContact& contact)
+{
+	auto a = contact.getShapeA()->getBody()->getNode();
+	auto b = contact.getShapeB()->getBody()->getNode();
+
+	if (a->getTag() == OBJECT_TAG::PLAYER_TAG)
+	{
+		//CCLOG("Name: %d ", b->getTag());
+	}
+	else
+	{
+		//CCLOG("Name: %d ", a->getTag());
+	}
+
+	// Check collision player with house
+	if (a->getTag() == OBJECT_TAG::HOUSE_TAG)
+	{
+		//if (b->getTag() == OBJECT_TAG::PLAYER_TAG == 0)
+		{
+			if (this->getPositionY() > groundPosition + 100 && isOnGround == true)
+			{
+				getPhysicsBody()->setGravityEnable(true);
+				isOnGround = false;
+			}
+			canFlash = false;	
+			CCLOG("FUCK %f", a->getBoundingBox().size.height);
+		}
+	}
+
+	if (b->getTag() == OBJECT_TAG::HOUSE_TAG)
+	{
+		//if (a->getTag() == OBJECT_TAG::PLAYER_TAG == 0)
+		{
+			if (this->getPositionY() > groundPosition + 100 && isOnGround == true)
+			{
+				getPhysicsBody()->setGravityEnable(true);
+				isOnGround = false;
+			}
+			canFlash = false;
+			CCLOG("FUCK you %f", a->getBoundingBox().size.height);
+		}
+	}
 }
 
 void Player::destroyCallback(Node* node)

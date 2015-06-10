@@ -103,4 +103,3 @@ void HUDLayer::slash(Ref* sender)
 {
 	player->attack();
 }
-

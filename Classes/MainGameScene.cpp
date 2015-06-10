@@ -1,5 +1,6 @@
 #include "MainGameScene.h"
 #include "MyBodyParser.h"
+#include "EnemySpawn.h"
 
 USING_NS_CC;
 
@@ -36,16 +37,15 @@ bool MainGame::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto ground = PhysicsBody::createBox(Size(960*3, 10), PhysicsMaterial(0, 0, 0));
+	auto ground = PhysicsBody::createBox(Size(960*3, 100), PhysicsMaterial(0, 0, 0));
 	ground->setDynamic(false);
 	ground->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
 	ground->setContactTestBitmask(true);
 
 	auto groundNode = Node::create();
-	groundNode->setTag(OBJECT_TAG::GROUND_TAG);
-	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y-20));
+	groundNode->setTag(OBJECT_TAG::GROUND_TAG);	
 	groundNode->setName("Ground");
-	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * 0.03f + origin.y));
+	groundNode->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height * (-0.03) + origin.y));
 	groundNode->setPhysicsBody(ground);
 	this->addChild(groundNode);	
 
@@ -57,41 +57,14 @@ bool MainGame::init()
 	Background::inst()->setSpeed(1.0f);
 
 	Player* player = Player::create();
-	player->run();
-	player->setPosition(Vec2(visibleSize.width * 0.2f + origin.x, visibleSize.height * 0.5f + origin.y));
+	//player->run();
+	player->setPosition(Vec2( 0, visibleSize.height * 0.7 + origin.y));
+	player->runAction(MoveBy::create(2, Vec2(visibleSize.width * 0.2f, 0)));
 	this->addChild(player);
-	
-	Enemy* enemy = Enemy::create(ENEMY1);
-	enemy->idle();
-	enemy->setPosition(Vec2(visibleSize.width * 0.5f + origin.x, visibleSize.height * 0.5f + origin.y));
-	this->addChild(enemy);
 
-	Enemy* enemy2 = Enemy::create(ENEMY2);
-	enemy2->idle();
-	enemy2->setPosition(Vec2(visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y));
-	this->addChild(enemy2);
-
-	/*auto bridge = Sprite::create("house layer\\bridge_front1.png");
-	MyBodyParser::getInstance()->parseJsonFile("house layer\\bridge.json");
-	auto body = MyBodyParser::getInstance()->bodyFormJson(bridge, "bridge", PhysicsMaterial(0, 0, 0));
-	body->setRotationEnable(false);	
-	body->setDynamic(false);
-	body->setCollisionBitmask(OBJECT_BISMASK::GROUND_MASK);
-	body->setContactTestBitmask(true);
-	bridge->setName("Ground");
-
-	if (body != nullptr)
-	{
-		bridge->setPhysicsBody(body);
-	}
-	else
-	{
-		auto rectBody = PhysicsBody::createBox(Size(200, 30), PhysicsMaterial(0, 0, 0));		
-		bridge->setPhysicsBody(rectBody);
-	}
-	bridge->setPosition(Vec2(visibleSize.width, 100));
-	bridge->runAction(MoveBy::create(5, Vec2(-1000, 0)));
-	this->addChild(bridge);*/
+	EnemySpawn* enemySpaw = EnemySpawn::createEnemySpawn();
+	enemySpaw->setPosition(visibleSize.width * 1.5, visibleSize.height * 0.8);
+	this->addChild(enemySpaw);
 
 	HUDLayer* hud = HUDLayer::create();
 	hud->setPlayer(player);

@@ -28,6 +28,7 @@ private:
 	void addHouse(int rand);
 
 	Node* createOneWayNode(float width, float height);
+	
 public:
 	static HouseLayer* inst();
 

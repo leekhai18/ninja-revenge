@@ -1,5 +1,5 @@
 #include "Enemy.h"
-
+#include "Player.h"
 
 Enemy* Enemy::create(ENEMY_TYPE _type)
 {
@@ -18,15 +18,18 @@ Enemy* Enemy::create(ENEMY_TYPE _type)
 
 bool Enemy::initEnemy(ENEMY_TYPE _type)
 {
+	visibleSize = Director::getInstance()->getVisibleSize();
 	enemyType = _type;
 
 	if (_type == ENEMY_TYPE::ENEMY1)
 	{
 		this->init("enemy1");
+		dictanceToSplash = visibleSize.width * 0.4;
 	}
 	else if (_type == ENEMY_TYPE::ENEMY2)
 	{
 		this->init("enemy2");
+		dictanceToSplash = visibleSize.width * 0.4;
 	}
 
 	this->setTag(OBJECT_TAG::ENEMY_TAG);
@@ -42,6 +45,11 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 	body->setContactTestBitmask(true);
 	this->setPhysicsBody(body);
 
+	//add collision detetion
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(Enemy::onContactBegin, this);	
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+
 	return true;
 }
 
@@ -49,21 +57,18 @@ void Enemy::update(float dt)
 {
 	Armature::update(dt);
 	this->setPositionX(this->getPositionX() - ENEMY_SPEED * dt);
-	if (this->getPositionX() < 450 && this->getPositionX() > 0)
+	if (this->getPositionX() < dictanceToSplash)
 	{
-		if (hasSlash == false)
+		if (isAttacked == false)
 		{
-			hasSlash = true;
+			isAttacked = true;
 			this->attack();
 		}
 	}
 
-	if (this->getPositionX() < -100)
+	if (this->getPositionX() < -200)
 	{
-		this->setPosition(random(1500, 2000), 200);
-		hasSlash = false;
-		isDie = false;
-		this->idle();
+		this->getParent()->removeChild(this);
 	}
 }
 
@@ -100,3 +105,58 @@ void Enemy::animationEvent(Armature *armature, MovementEventType movementType, c
 	}
 }
 
+bool Enemy::onContactBegin(PhysicsContact& contact)
+{
+	auto a = contact.getShapeA()->getBody()->getNode();
+	auto b = contact.getShapeB()->getBody()->getNode();
+
+	// Check collision player with ground
+	if (a->getTag() == OBJECT_TAG::GROUND_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG)
+	{
+		if (isOnGround == false)
+		{
+			isOnGround == true;
+			getPhysicsBody()->setGravityEnable(false);
+			getPhysicsBody()->setVelocity(Vec2(0, 0));
+			return true;
+		}
+		return false;
+	}
+
+	if (b->getTag() == OBJECT_TAG::GROUND_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG)
+	{
+		if (isOnGround == false)
+		{
+			isOnGround == true;
+			getPhysicsBody()->setGravityEnable(false);
+			getPhysicsBody()->setVelocity(Vec2(0, 0));
+			return true;
+		}
+		return false;
+	}
+
+	// Check collision with enemy
+	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto p = (Player*)a;
+		if (p->getState() == ESTATE::ATTACK)
+		{
+			auto e = (Enemy*)b;
+			e->die();
+		}
+		return false;
+	}
+
+	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto p = (Player*)b;
+		if (p->getState() == ESTATE::ATTACK)
+		{
+			auto e = (Enemy*)a;
+			e->die();
+		}
+		return false;
+	}
+
+	return false;
+}

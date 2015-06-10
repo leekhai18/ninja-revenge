@@ -147,6 +147,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\BackgroundTemplate.cpp" />
     <ClCompile Include="..\Classes\BrigdeLayer.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
+    <ClCompile Include="..\Classes\EnemySpawn.cpp" />
     <ClCompile Include="..\Classes\Global.cpp" />
     <ClCompile Include="..\Classes\MainGameScene.cpp" />
     <ClCompile Include="..\Classes\HouseLayer.cpp" />
@@ -167,13 +168,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\BackgroundTemplate.h" />
     <ClInclude Include="..\Classes\BrigdeLayer.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
+    <ClInclude Include="..\Classes\EnemySpawn.h" />
     <ClInclude Include="..\Classes\Global.h" />
     <ClInclude Include="..\Classes\MainGameScene.h" />
     <ClInclude Include="..\Classes\HouseLayer.h" />
     <ClInclude Include="..\Classes\HUDLayer.h" />
-
     <ClInclude Include="..\Classes\MainMenuScene.h" />
-
     <ClInclude Include="..\Classes\MyBodyParser.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\RockLayer.h" />
