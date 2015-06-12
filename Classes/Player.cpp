@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Global.h"
 #include "Enemy.h"
+#include "SoundManager.h"
 
 Player::Player() : Armature(), isJumping(false), canFlash(false), flashPositionY(0), isOnGround(false), groundPosition(0)
 {
@@ -86,11 +87,13 @@ void Player::run()
 {
 	this->getAnimation()->play("Run", 0, 1);
 	this->setState(ESTATE::RUN);
+	SoundManager::inst()->playFootStepEffect(true);
 }
 
 void Player::jump()
 {
 	if (!isJumping && (state == ESTATE::RUN || state == ESTATE::ATTACK)) {
+		SoundManager::inst()->playJumpEffect();
 		dirtPlay();
 		timeHolding = PLAYER_TIME_HOLDING;
 		isHolding = true;
@@ -106,6 +109,7 @@ void Player::jump()
 	else
 	{
 		if (isJumping && state == ESTATE::JUMP) {
+			SoundManager::inst()->playJumpEffect();
 			timeHolding = PLAYER_TIME_HOLDING;
 			isHolding = true;
 			auto vel = getPhysicsBody()->getVelocity();
@@ -126,6 +130,7 @@ void Player::attack()
 {
 	if (timeDelayAttack <= 0)
 	{
+		SoundManager::inst()->playSlash1Effect();
 		timeDelayAttack = PLAYER_SLASH_DELAY;
 		int rand = random(1, 2);
 		std::string animName = "Attack";
@@ -154,6 +159,17 @@ void Player::flashDown()
 	if (canFlash)
 	{
 		this->getAnimation()->play("FlashDown");
+	}
+}
+
+void Player::hit(int damage)
+{
+	CCLOG("Hit %d damage", damage);
+	SoundManager::inst()->playHurt1Effect();
+	hitPoint -= damage;
+	if (hitPoint <= 0)
+	{
+		this->die();
 	}
 }
 
@@ -198,13 +214,19 @@ bool Player::onContactBegin(PhysicsContact& contact)
 		if (a->getPosition().y + a->getParent()->getPosition().y < b->getPosition().y && isOnGround == false)
 		{
 			isJumping = false;
-			dirtPlay();
 			isOnGround = true;
+
 			if (groundPosition == 0)
 				groundPosition = this->getPositionY();
-			this->run();
 			this->getPhysicsBody()->setVelocity(Vec2(0, 0));
 			this->getPhysicsBody()->setGravityEnable(false);
+
+			if (state != ESTATE::ATTACK)
+			{
+				this->run();
+			}
+			dirtPlay();
+			
 			return true;
 		}
 		else
@@ -218,13 +240,19 @@ bool Player::onContactBegin(PhysicsContact& contact)
 		if (b->getPosition().y + b->getParent()->getPosition().y < a->getPosition().y)
 		{
 			isJumping = false;
-			dirtPlay();
 			isOnGround = true;
+
 			if (groundPosition == 0)
 				groundPosition = this->getPositionY();
-			this->run();
 			this->getPhysicsBody()->setVelocity(Vec2(0, 0));
 			this->getPhysicsBody()->setGravityEnable(false);
+
+			if (state != ESTATE::ATTACK)
+			{
+				this->run();
+			}
+			dirtPlay();
+
 			return true;
 		}
 		else

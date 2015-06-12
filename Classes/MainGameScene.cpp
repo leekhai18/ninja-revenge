@@ -63,6 +63,7 @@ bool MainGame::init()
 	this->addChild(player);
 
 	EnemySpawn* enemySpaw = EnemySpawn::createEnemySpawn();
+	enemySpaw->setPlayer(player);
 	enemySpaw->setPosition(visibleSize.width * 1.5, visibleSize.height * 0.8);
 	this->addChild(enemySpaw);
 

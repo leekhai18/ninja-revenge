@@ -63,6 +63,7 @@ void EnemySpawn::respawn()
 	int t = random(0, level);
 	ENEMY_TYPE type = ENEMY_TYPE(t);
 	Enemy* enemy = Enemy::create(type);
+	enemy->setPlayer(player);
 	enemy->setPosition(this->getPosition());
 
 	this->getParent()->addChild(enemy);

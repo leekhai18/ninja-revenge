@@ -131,7 +131,7 @@ void MainMenuScene::updateStartButton(CCNode* sender){
 void MainMenuScene::menuPlayCallback(Ref* pSender)
 {
 	auto storyScene = Story::createScene();
-	SoundManager::inst()->stopBackgroundTheme();
+	//SoundManager::inst()->stopBackgroundTheme();
 	Director::getInstance()->replaceScene(storyScene);
 }
 

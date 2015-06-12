@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Player.h"
+#include "SoundManager.h"
 
 Enemy* Enemy::create(ENEMY_TYPE _type)
 {
@@ -25,11 +26,13 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 	{
 		this->init("enemy1");
 		dictanceToSplash = visibleSize.width * 0.4;
+		damage = 25;
 	}
 	else if (_type == ENEMY_TYPE::ENEMY2)
 	{
 		this->init("enemy2");
 		dictanceToSplash = visibleSize.width * 0.4;
+		damage = 30;
 	}
 
 	this->setTag(OBJECT_TAG::ENEMY_TAG);
@@ -55,15 +58,24 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 
 void Enemy::update(float dt)
 {
+			
 	Armature::update(dt);
 	this->setPositionX(this->getPositionX() - ENEMY_SPEED * dt);
 	if (this->getPositionX() < dictanceToSplash)
 	{
-		if (isAttacked == false)
+		if (player != nullptr)
 		{
-			isAttacked = true;
-			this->attack();
+			if (abs(this->getPositionY() - player->getPositionY()) < visibleSize.height * 0.2)
+			{
+				if (isAttacked == false)
+				{
+					isAttacked = true;
+					this->attack();
+					player->hit(damage);
+				}
+			}
 		}
+		
 	}
 
 	if (this->getPositionX() < -200)
@@ -88,6 +100,7 @@ void Enemy::die()
 {
 	this->getAnimation()->play("Die");
 	this->setState(ESTATE::DIE);
+	SoundManager::inst()->playDie1Effect();
 }
 
 void Enemy::animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)

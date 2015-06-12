@@ -12,6 +12,7 @@
 #include "chipmunk.h"
 #endif
 #include "Global.h"
+#include "Player.h"
 
 USING_NS_CC;
 using namespace cocostudio;
@@ -24,8 +25,13 @@ private:
 	bool		isAttacked = false;
 	bool		isDie = false;
 	bool		isOnGround = false;
+	
 	float		dictanceToSplash = 0;
+	int			damage = 0;
+
 	Size		visibleSize;
+
+	Player*		player = nullptr;
 
 public:
 	//static create method
@@ -39,6 +45,7 @@ public:
 	//get & set method || SYNTHESIZE
 	CC_SYNTHESIZE(ESTATE, state, State);
 	CC_SYNTHESIZE(ENEMY_TYPE, enemyType, EnemyType);
+	void setPlayer(Player* _player) { player = _player; }
 	//behavior
 	void idle();
 	void attack();
