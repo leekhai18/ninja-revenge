@@ -19,7 +19,8 @@
 #include "cocos2d.h"
 #include "StoryScene.h"
 #include "SoundManager.h"
-
+//#include "FileReader.h"
+//#include "FileWriter.h"
 USING_NS_CC;
 
 class MainMenuScene : public Layer

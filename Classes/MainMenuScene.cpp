@@ -112,13 +112,19 @@ bool MainMenuScene::init()
 	this->addChild(menu, 1);
 
 	this->createTable();
-
 	SoundManager::inst()->playBackgroundTheme(true);
 
 	//this->showTable();
-
+	//std::vector<std::string> lines;
+	//FileWriter::writeFirstTime("deleteUser.txt");
+	//FileReader::readFile("deleteUser.txt", lines);
 	return true;
 }
+
+//void readFile(){
+//	std::vector<std::string> lines;
+//	FileReader::readFile("deleteUser.txt", lines);
+//}
 
 void MainMenuScene::updateStartButton(CCNode* sender){
 	startButtonScaleFactor = startButtonScaleFactor < 1.0f ? 1.0f : 0.75f;
@@ -131,7 +137,6 @@ void MainMenuScene::updateStartButton(CCNode* sender){
 void MainMenuScene::menuPlayCallback(Ref* pSender)
 {
 	auto storyScene = Story::createScene();
-	SoundManager::inst()->stopBackgroundTheme();
 	Director::getInstance()->replaceScene(storyScene);
 }
 
