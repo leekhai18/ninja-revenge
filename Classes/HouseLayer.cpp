@@ -59,11 +59,12 @@ Node* HouseLayer::createOneWayNode(float width, float height)
 	body->setContactTestBitmask(true);
 	node->setPhysicsBody(body);
 	node->setName("Ground");
+	node->setTag(OBJECT_TAG::GROUND_TAG);
 	return node;
 }
 
 void HouseLayer::update(float delta){
-	if (house->getPosition().x < - house->getContentSize().width){
+	if (house->getPosition().x < - house->getContentSize().width - random(100, 1000)){
 		this->addHouse(random(1, 5));
 	}
 	else{
@@ -75,18 +76,19 @@ void HouseLayer::update(float delta){
 void HouseLayer::addHouse(int rand){
 	this->removeChild(house);
 	//rand = 0;
-	int pos = random(0, 1000);
+	//int pos = random(0, 1000);
+	int pos = random(300, 1000);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	std::string path;
 	float diff, scaleFactor;
+	
 	Node* child1;
 	Node* child2;
-	
-	//these diff only work when the scale factor is 2.0f
+
 	switch (rand){
 	case 0: {
 				path = BRIGDE_BACK_1_PATH; diff = BRIGDE_BACK_1_HEIGHT / 2 - WALL_HEIGHT; scaleFactor = 1.0f;
-				BrigdeLayer::inst()->addBrigde(pos + +visibleSize.width); 
+				BrigdeLayer::inst()->addBrigde(pos + visibleSize.width); 
 				house = Sprite::create(path);
 				break;
 	}
@@ -135,7 +137,17 @@ void HouseLayer::addHouse(int rand){
 		break;
 	}
 
+	auto houseBody = PhysicsBody::createBox(house->boundingBox().size, PhysicsMaterial(0, 0, 0));
+	houseBody->setRotationEnable(false);
+	houseBody->setDynamic(false);
+	houseBody->setCollisionBitmask(OBJECT_BISMASK::HOUSE_MASK);
+	houseBody->setContactTestBitmask(true);
+	house->setPhysicsBody(houseBody);
+	house->setName("House");
+	house->setTag(OBJECT_TAG::HOUSE_TAG);
+	
+
 	house->setScale(scaleFactor);
-	house->setPosition(pos + visibleSize.width -500 +house->getContentSize().width / 2, WALL_HEIGHT + diff);
+	house->setPosition(pos + visibleSize.width, WALL_HEIGHT + diff);
 	this->addChild(house);
 }

@@ -1,8 +1,7 @@
 #ifndef _GLOBAL_H_
 #define _GLOBAL_H_
 
-//define some config (don't use too much)
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 enum OBJECT_BISMASK
 {
@@ -10,7 +9,8 @@ enum OBJECT_BISMASK
 	GROUND_MASK = 0x02,
 	ENEMY_MASK = 0x03,
 	KURENAI_MASK = 0x04,
-	ARROW_MASK = 0x05
+	ARROW_MASK = 0x05,
+	HOUSE_MASK = 0x06
 };
 
 enum OBJECT_TAG
@@ -19,7 +19,8 @@ enum OBJECT_TAG
 	GROUND_TAG,
 	ENEMY_TAG,
 	KURENAI_TAG,
-	ARROW_TAG
+	ARROW_TAG,
+	HOUSE_TAG
 };
 
 enum ESTATE

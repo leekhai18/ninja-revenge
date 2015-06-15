@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\Global.cpp" />
     <ClCompile Include="..\Classes\MainGameScene.cpp" />
@@ -98,5 +99,49 @@
     <Filter Include="Skill">
       <UniqueIdentifier>{75a3cf5a-8bf0-4fe3-882c-f5a856791956}</UniqueIdentifier>
     </Filter>
+=======
+    <ClCompile Include="..\Classes\Background.cpp" />
+    <ClCompile Include="..\Classes\BackgroundLayer.cpp" />
+    <ClCompile Include="..\Classes\BackgroundTemplate.cpp" />
+    <ClCompile Include="..\Classes\BrigdeLayer.cpp" />
+    <ClCompile Include="..\Classes\Enemy.cpp" />
+    <ClCompile Include="..\Classes\Global.cpp" />
+    <ClCompile Include="..\Classes\MainGameScene.cpp" />
+    <ClCompile Include="..\Classes\HouseLayer.cpp" />
+    <ClCompile Include="..\Classes\HUDLayer.cpp" />
+    <ClCompile Include="..\Classes\MainMenuScene.cpp" />
+    <ClCompile Include="..\Classes\MyBodyParser.cpp" />
+    <ClCompile Include="..\Classes\Player.cpp" />
+    <ClCompile Include="..\Classes\RockLayer.cpp" />
+    <ClCompile Include="..\Classes\SoundManager.cpp" />
+    <ClCompile Include="..\Classes\StoryScene.cpp" />
+    <ClCompile Include="..\Classes\WallLayer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Classes\EnemySpawn.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Background.h" />
+    <ClInclude Include="..\Classes\BackgroundLayer.h" />
+    <ClInclude Include="..\Classes\BackgroundTemplate.h" />
+    <ClInclude Include="..\Classes\BrigdeLayer.h" />
+    <ClInclude Include="..\Classes\Enemy.h" />
+    <ClInclude Include="..\Classes\Global.h" />
+    <ClInclude Include="..\Classes\MainGameScene.h" />
+    <ClInclude Include="..\Classes\HouseLayer.h" />
+    <ClInclude Include="..\Classes\HUDLayer.h" />
+    <ClInclude Include="..\Classes\MainMenuScene.h" />
+    <ClInclude Include="..\Classes\MyBodyParser.h" />
+    <ClInclude Include="..\Classes\Player.h" />
+    <ClInclude Include="..\Classes\RockLayer.h" />
+    <ClInclude Include="..\Classes\SoundManager.h" />
+    <ClInclude Include="..\Classes\StoryScene.h" />
+    <ClInclude Include="..\Classes\WallLayer.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="..\Classes\EnemySpawn.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc" />
+>>>>>>> e8aff71476df4ec06d4b11d0d3cf18d8582e507d
   </ItemGroup>
 </Project>

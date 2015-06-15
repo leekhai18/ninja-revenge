@@ -38,7 +38,7 @@ public:
 	static SoundManager* inst();
 	void init();
 
-	void playBackgroundTheme(bool isLoop = false);
+	void playBackgroundTheme(bool isLoop = true);
 	void stopBackgroundTheme();
 
 	void playArrowEffect(bool isLoop = false);
