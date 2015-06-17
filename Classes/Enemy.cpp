@@ -51,6 +51,8 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 	//add collision detetion
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Enemy::onContactBegin, this);	
+	contactListener->onContactPreSolve = CC_CALLBACK_2(Enemy::onContactPreSolve, this);
+
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	return true;
@@ -71,7 +73,7 @@ void Enemy::update(float dt)
 				{
 					isAttacked = true;
 					this->attack();
-					player->hit(damage);
+					player->setHit(damage);
 				}
 			}
 		}
@@ -96,7 +98,7 @@ void Enemy::attack()
 	this->setState(ESTATE::ATTACK);	
 }
 
-void Enemy::die()
+void Enemy::setDie()
 {
 	this->getAnimation()->play("Die");
 	this->setState(ESTATE::DIE);
@@ -152,12 +154,42 @@ bool Enemy::onContactBegin(PhysicsContact& contact)
 	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
 	{
 		auto p = (Player*)a;
+		if (p->getState() == ESTATE::ATTACK || p->getIsUseSkill())
+		{
+			auto e = (Enemy*)b;
+			e->setDie();
+		}
+		return false;
+	}
+
+	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto p = (Player*)b;
+		if (p->getState() == ESTATE::ATTACK || p->getIsUseSkill())
+		{
+			auto e = (Enemy*)a;
+			e->setDie();
+		}
+		return false;
+	}
+
+	return false;
+}
+
+void Enemy::onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve)
+{
+	auto a = contact.getShapeA()->getBody()->getNode();
+	auto b = contact.getShapeB()->getBody()->getNode();
+	// Check collision with enemy
+	
+	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto p = (Player*)a;
 		if (p->getState() == ESTATE::ATTACK)
 		{
 			auto e = (Enemy*)b;
-			e->die();
+			e->setDie();
 		}
-		return false;
 	}
 
 	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
@@ -166,9 +198,35 @@ bool Enemy::onContactBegin(PhysicsContact& contact)
 		if (p->getState() == ESTATE::ATTACK)
 		{
 			auto e = (Enemy*)a;
-			e->die();
+			e->setDie();
 		}
-		return false;
+	}
+}
+
+bool Enemy::onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve)
+{
+	auto a = contact.getShapeA()->getBody()->getNode();
+	auto b = contact.getShapeB()->getBody()->getNode();
+	// Check collision with enemy
+	
+	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto p = (Player*)a;
+		if (p->getState() == ESTATE::ATTACK)
+		{
+			auto e = (Enemy*)b;
+			e->setDie();
+		}
+	}
+
+	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
+	{
+		auto p = (Player*)b;
+		if (p->getState() == ESTATE::ATTACK)
+		{
+			auto e = (Enemy*)a;
+			e->setDie();
+		}
 	}
 
 	return false;

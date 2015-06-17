@@ -49,12 +49,13 @@ public:
 	//behavior
 	void idle();
 	void attack();
-	void die();
+	void setDie();
 
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
 	bool onContactBegin(PhysicsContact& contact);
 	void onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve);
+	bool onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve);
 };
 
 #endif

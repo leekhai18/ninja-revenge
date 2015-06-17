@@ -3,7 +3,8 @@
 #include "Enemy.h"
 #include "SoundManager.h"
 
-Player::Player() : Armature(), isJumping(false), canFlash(false), flashPositionY(0), isOnGround(false), groundPosition(0)
+Player::Player() : Armature(), isJumping(false), canFlash(false), flashPositionY(0),
+isOnGround(false), groundPosition(0), canUseSkill1(true), timeUseSkill1(0), timeToAddNewShadow(0)
 {
 	
 }
@@ -52,6 +53,8 @@ bool Player::initPlayer()
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Player::onContactBegin, this);
 	contactListener->onContactSeperate = CC_CALLBACK_1(Player::onContactSeperate, this);
+	contactListener->onContactPostSolve = CC_CALLBACK_2(Player::onContactPostSolve, this);
+
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 
@@ -81,13 +84,33 @@ void Player::update(float dt)
 			isHolding = false;
 		}
 	}
+
+	if (canUseSkill1)
+	{
+		timeUseSkill1 += dt;
+		if (timeUseSkill1 >= PLAYER_TIME_USE_SKILL1)
+		{
+			state = ESTATE::RUN;
+			canUseSkill1 = false;
+			timeUseSkill1 = 0;
+		}
+		else
+		{
+			timeToAddNewShadow += dt;
+			if (timeToAddNewShadow > 0.2f)
+			{
+				timeToAddNewShadow = 0;
+				this->addAShadow();
+			}
+		}
+	}
 }
 
 void Player::run()
 {
 	this->getAnimation()->play("Run", 0, 1);
 	this->setState(ESTATE::RUN);
-	SoundManager::inst()->playFootStepEffect(true);
+	SoundManager::inst()->playFootStepEffect(true);	
 }
 
 void Player::jump()
@@ -140,7 +163,7 @@ void Player::attack()
 	}
 }
 
-void Player::die()
+void Player::setDie()
 {
 	this->getAnimation()->play("Die");
 	this->setState(ESTATE::DIE);
@@ -162,15 +185,36 @@ void Player::flashDown()
 	}
 }
 
-void Player::hit(int damage)
+void Player::setHit(int damage)
 {
 	CCLOG("Hit %d damage", damage);
 	SoundManager::inst()->playHurt1Effect();
 	hitPoint -= damage;
 	if (hitPoint <= 0)
 	{
-		this->die();
+		this->setDie();
 	}
+}
+
+void Player::addAShadow()
+{
+	Armature* shadow = Armature::create("player");
+	shadow->setPosition(this->getPosition() - Vec2(0, 30));
+	int currentIndex = this->getAnimation()->getCurrentFrameIndex();
+	if (currentIndex < 0)
+		currentIndex = 0;
+	shadow->getAnimation()->play(this->getAnimation()->getCurrentMovementID(), currentIndex);
+	shadow->getAnimation()->gotoAndPlay(currentIndex);
+	shadow->getAnimation()->setSpeedScale(0);
+	shadow->runAction(Sequence::create(MoveBy::create(1, Vec2(-700, 0)), CallFunc::create(CC_CALLBACK_0(Player::destroyCallback, this, shadow)), nullptr));
+	shadow->setColor(Color3B(Color4F(180, 180, 180, 0.1f)));
+	this->getParent()->addChild(shadow, 0);
+}
+
+void Player::setSkill1()
+{
+	state = ESTATE::SKILL1;
+	canUseSkill1 = true;
 }
 
 void Player::dirtPlay()
@@ -289,20 +333,20 @@ bool Player::onContactBegin(PhysicsContact& contact)
 	// Check collision with enemy
 	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
 	{
-		if (this->getState() == ESTATE::ATTACK)
+		if (this->getState() == ESTATE::ATTACK || this->getIsUseSkill())
 		{
 			auto e = (Enemy*)b;
-			e->die();
+			e->setDie();
 		}	
 		return false;
 	}
 
 	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
 	{
-		if (this->getState() == ESTATE::ATTACK)
+		if (this->getState() == ESTATE::ATTACK || this->getIsUseSkill())
 		{
 			auto e = (Enemy*)a;
-			e->die();
+			e->setDie();
 		}
 		return false;
 	}
@@ -358,6 +402,13 @@ void Player::onContactSeperate(PhysicsContact& contact)
 			CCLOG("FUCK you %f", a->getBoundingBox().size.height);
 		}
 	}
+}
+
+void Player::onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve)
+{
+	auto a = contact.getShapeA()->getBody()->getNode();
+	auto b = contact.getShapeB()->getBody()->getNode();
+
 }
 
 void Player::destroyCallback(Node* node)

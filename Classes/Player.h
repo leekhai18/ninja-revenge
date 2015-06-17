@@ -19,6 +19,7 @@ using namespace cocostudio;
 #define	PLAYER_JUMP_SPEED		450
 #define PLAYER_SLASH_DELAY		0.7f
 #define PLAYER_TIME_HOLDING		0.3f
+#define PLAYER_TIME_USE_SKILL1	10.0f
 
 class Player : public Armature
 {
@@ -32,6 +33,10 @@ private:
 	bool		canFlash;
 	bool		isOnGround;
 	float		groundPosition;
+
+	bool		canUseSkill1;
+	float		timeUseSkill1;
+	float		timeToAddNewShadow;
 
 	//properties of player
 	float		jumpSpeed;
@@ -67,17 +72,22 @@ public:
 	void jump();
 	void setHold(bool val);
 	void attack();
-	void die();
+	void setDie();
 	void flashUp();
 	void flashDown();
-	void hit(int damage);
+	void setHit(int damage);
 
+	//skill 1
+	void addAShadow();
+	void setSkill1();
+	bool getIsUseSkill() { return canUseSkill1; }
 	void dirtPlay();
 
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
 	bool onContactBegin(PhysicsContact& contact);
 	void onContactSeperate(PhysicsContact& contact);
+	void onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve);
 
 	void destroyCallback(Node* node);
 };
