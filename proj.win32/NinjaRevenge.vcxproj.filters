@@ -2,6 +2,104 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="..\Classes\Enemy.cpp" />
+    <ClCompile Include="..\Classes\Global.cpp" />
+    <ClCompile Include="..\Classes\MainGameScene.cpp" />
+    <ClCompile Include="..\Classes\HUDLayer.cpp" />
+    <ClCompile Include="..\Classes\MyBodyParser.cpp" />
+    <ClCompile Include="..\Classes\Player.cpp" />
+    <ClCompile Include="..\Classes\StoryScene.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Classes\Background.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundLayer.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundTemplate.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BrigdeLayer.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HouseLayer.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RockLayer.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WallLayer.cpp">
+      <Filter>BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SoundManager.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMenuScene.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill.cpp">
+      <Filter>Skill</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Enemy.h" />
+    <ClInclude Include="..\Classes\Global.h" />
+    <ClInclude Include="..\Classes\MainGameScene.h" />
+    <ClInclude Include="..\Classes\HUDLayer.h" />
+    <ClInclude Include="..\Classes\MyBodyParser.h" />
+    <ClInclude Include="..\Classes\Player.h" />
+    <ClInclude Include="..\Classes\StoryScene.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="..\Classes\BackgroundTemplate.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Background.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackgroundLayer.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BrigdeLayer.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HouseLayer.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RockLayer.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WallLayer.h">
+      <Filter>BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SoundManager.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenuScene.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill.h">
+      <Filter>Skill</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BackGround">
+      <UniqueIdentifier>{23bb0b53-93c0-4793-8f64-9a8ae397a331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{63175c7d-b113-4b06-8207-caeb5fbd9f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{f4e3266f-8d13-43d3-9070-2b58944265d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skill">
+      <UniqueIdentifier>{75a3cf5a-8bf0-4fe3-882c-f5a856791956}</UniqueIdentifier>
+    </Filter>
+=======
     <ClCompile Include="..\Classes\Background.cpp" />
     <ClCompile Include="..\Classes\BackgroundLayer.cpp" />
     <ClCompile Include="..\Classes\BackgroundTemplate.cpp" />
@@ -46,5 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
+>>>>>>> e8aff71476df4ec06d4b11d0d3cf18d8582e507d
   </ItemGroup>
 </Project>

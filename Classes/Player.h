@@ -71,8 +71,12 @@ public:
 	void run();
 	void jump();
 	void setHold(bool val);
+
 	void attack();
 	void setDie();
+	void useOmislash();
+	void useBladeStorm();
+
 	void flashUp();
 	void flashDown();
 	void setHit(int damage);
@@ -82,6 +86,10 @@ public:
 	void setSkill1();
 	bool getIsUseSkill() { return canUseSkill1; }
 	void dirtPlay();
+
+	bool canAttack();
+	bool canOmiSlash();
+	bool canBladeStorm();
 
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);

@@ -75,6 +75,8 @@ void HouseLayer::update(float delta){
 
 void HouseLayer::addHouse(int rand){
 	this->removeChild(house);
+	//rand = 0;
+	//int pos = random(0, 1000);
 	int pos = random(300, 1000);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	std::string path;
