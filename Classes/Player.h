@@ -66,13 +66,21 @@ public:
 	void run();
 	void jump();
 	void setHold(bool val);
+
 	void attack();
+	void useOmislash();
+	void useBladeStorm();
+
 	void die();
 	void flashUp();
 	void flashDown();
 	void hit(int damage);
 
 	void dirtPlay();
+
+	bool canAttack();
+	bool canOmiSlash();
+	bool canBladeStorm();
 
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);

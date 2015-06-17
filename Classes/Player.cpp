@@ -140,6 +140,34 @@ void Player::attack()
 	}
 }
 
+void Player::useOmislash()
+{
+	if (timeDelayAttack <= 0)
+	{
+		SoundManager::inst()->playSlash1Effect();
+		timeDelayAttack = PLAYER_SLASH_DELAY;
+		int rand = random(1, 2);
+		std::string animName = "Attack";
+		std::string number = std::to_string(rand);
+		this->getAnimation()->play(animName + number);
+		this->setState(ESTATE::ATTACK);
+	}
+}
+
+void Player::useBladeStorm()
+{
+	if (timeDelayAttack <= 0)
+	{
+		SoundManager::inst()->playSlash1Effect();
+		timeDelayAttack = PLAYER_SLASH_DELAY;
+		int rand = random(1, 2);
+		std::string animName = "Attack";
+		std::string number = std::to_string(rand);
+		this->getAnimation()->play(animName + number);
+		this->setState(ESTATE::ATTACK);
+	}
+}
+
 void Player::die()
 {
 	this->getAnimation()->play("Die");
@@ -363,4 +391,19 @@ void Player::onContactSeperate(PhysicsContact& contact)
 void Player::destroyCallback(Node* node)
 {
 	node->getParent()->removeChild(node);
+}
+
+bool Player::canAttack()
+{
+	return this->timeDelayAttack < 0;
+}
+
+bool Player::canBladeStorm()
+{
+	return this->timeDelayAttack < 0;
+}
+
+bool Player::canOmiSlash()
+{
+	return this->timeDelayAttack < 0;
 }
