@@ -29,17 +29,11 @@ bool HUDLayer::init()
 	visibleSize = Director::getInstance()->getVisibleSize();
 	auto origin = Director::getInstance()->getVisibleOrigin();
 
-	/////////////////////////////
-	// 2. add a menu item with "X" image, which is clicked to quit the program
-	//    you may modify it.
-	
-	// add a "close" icon to exit the progress. it's an autorelease object
+	initHpBar();
 
 	initSwordItem();
 	initOmiSlashItem();
 	initBladeStormItem();
-
-	// create menu, it's an autorelease object
 	cocos2d::Vector<MenuItem*> items;
 	items.pushBack(swordItem);
 	items.pushBack(omislashItem);
@@ -48,6 +42,7 @@ bool HUDLayer::init()
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
+	
 	//event
 	//  Create a "one by one" touch event listener
 	// (processes one touch at a time)
@@ -109,6 +104,7 @@ void HUDLayer::update(float dt)
 
 	if (player->canBladeStorm())
 		this->bladeStormItem->setEnabled(true);
+	updateHpBar();
 }
 
 void HUDLayer::slash(Ref* sender)
@@ -206,7 +202,7 @@ void HUDLayer::initOmiSlashItem()
 	auto omislashDisabledImage = Sprite::create(SKILL_DISABLED_PATH);
 	omislashItem->setDisabledImage(omislashDisabledImage);
 
-	omiRect = new CCRect(omislashItem->getDisabledImage()->getPosition().x - omislashItem->getContentSize().width/2
+	omiRect = new CCRect(omislashItem->getDisabledImage()->getPosition().x - omislashItem->getContentSize().width / 2
 		, omislashItem->getPosition().y - omislashItem->getContentSize().height / 2
 		, omislashItem->getDisabledImage()->getContentSize().width
 		, omislashItem->getDisabledImage()->getContentSize().height);
@@ -220,3 +216,68 @@ bool HUDLayer::intersect(CCRect* rect, Vec2 point){
 	bool d = rect->getMinY() > point.y;
 	return !(a || b || c || d);
 }
+
+void HUDLayer::initHpBar()
+{
+
+
+	hpBarBorder = CCSprite::create(HP_BAR_BORDER_PATH);
+	hpBarBorder->setZOrder(10);
+	hpBarBorder->setPosition(hpBarBorder->getContentSize().width / 2 - hpBarBorder->getContentSize().width / 50,
+		hpBarBorder->getContentSize().height / 2 - hpBarBorder->getContentSize().height / 20);
+
+
+	hpBar = CCProgressTimer::create(CCSprite::create(HP_BAR_PATH));
+	// Set this progress bar object as kCCProgressTimerTypeBar (%)
+	hpBar->setType(ProgressTimerType::BAR);
+	// Set anchor point in 0,0 and add it as a child to our border sprite
+	hpBar->setZOrder(69);
+	hpBar->setAnchorPoint(ccp(0, 0));
+	hpBar->setMidpoint(ccp(0, 0));
+	hpBar->setPosition(Vec2(hpBarBorder->getContentSize().width / 3, hpBarBorder->getContentSize().height / 2));
+	hpBar->setBarChangeRate(ccp(1, 0)); // To make width 100% always
+	hpBar->setPercentage(100);
+	hpBarBorder->addChild(hpBar); // Add it inside the border sprite
+
+
+
+	headIcon = CCSprite::create(HEAD_PATH);
+	headIcon->setAnchorPoint(ccp(0, 0));
+	headIcon->setPosition(headIcon->getContentSize().width / 5, headIcon->getContentSize().height / 5);
+	headIcon->setZOrder(20);
+	hpBarBorder->addChild(headIcon);
+
+	auto iconBackground = CCSprite::create("UI\\power.png");
+	iconBackground->setPosition(hpBarBorder->getContentSize().width / 4,
+		visibleSize.height - 3 * hpBarBorder->getContentSize().height / 4);
+	iconBackground->addChild(hpBarBorder);
+
+	this->addChild(iconBackground, 1);
+
+	hpDecRate = 0.0f;
+	tmpHP = PLAYER_MAX_HP;
+}
+
+void HUDLayer::updateHpBar()
+{
+	float realHP = player->getHP();
+
+	//calculate hp decrease rate
+	float hpDiff =  tmpHP - realHP;
+	if (hpDiff / 60.0f > hpDecRate){
+		 
+		hpDecRate = DELTA_TIME * hpDiff / HP_DECREASE_DURATION;
+	}
+
+	// update hp progess bar
+	if (hpDecRate > 0){
+		tmpHP = tmpHP - hpDecRate < realHP ? realHP : tmpHP - hpDecRate;
+
+		if (tmpHP <= realHP)
+			hpDecRate = 0;
+		float percent = 100.0f * tmpHP / player->getMaxHP();
+		this->hpBar->setPercentage(percent);
+	}
+}
+
+

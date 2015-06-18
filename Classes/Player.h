@@ -20,6 +20,7 @@ using namespace cocostudio;
 #define PLAYER_SLASH_DELAY		0.7f
 #define PLAYER_TIME_HOLDING		0.3f
 #define PLAYER_TIME_USE_SKILL1	10.0f
+#define PLAYER_MAX_HP 500.0f
 
 class Player : public Armature
 {
@@ -98,6 +99,9 @@ public:
 	void onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve);
 
 	void destroyCallback(Node* node);
+
+	int getHP();
+	int getMaxHP();
 };
 
 #endif

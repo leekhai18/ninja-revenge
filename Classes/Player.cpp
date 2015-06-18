@@ -446,6 +446,7 @@ void Player::destroyCallback(Node* node)
 
 bool Player::canAttack()
 {
+	
 	return this->timeDelayAttack < 0;
 }
 
@@ -457,4 +458,14 @@ bool Player::canBladeStorm()
 bool Player::canOmiSlash()
 {
 	return this->timeDelayAttack < 0;
+}
+
+int Player::getHP()
+{
+	return this->hitPoint;
+}
+
+int Player::getMaxHP()
+{
+	return PLAYER_MAX_HP;
 }
