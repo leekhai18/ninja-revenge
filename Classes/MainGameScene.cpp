@@ -60,7 +60,7 @@ bool MainGame::init()
 	//player->run();
 	player->setPosition(Vec2( 0, visibleSize.height * 0.7 + origin.y));
 	player->runAction(MoveBy::create(2, Vec2(visibleSize.width * 0.2f, 0)));
-	this->addChild(player);
+	this->addChild(player, 1);
 
 	EnemySpawn* enemySpaw = EnemySpawn::createEnemySpawn();
 	enemySpaw->setPlayer(player);

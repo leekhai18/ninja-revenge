@@ -96,7 +96,7 @@ void HouseLayer::addHouse(int rand){
 	case 1: 
 		path = HOUSE_1_PATH; diff = 90; scaleFactor = SCALE_FACTOR;
 		house = Sprite::create(path);
-		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.6f, visibleSize.height * 0.02f);
 		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.77);
 		child2 = createOneWayNode(house->boundingBox().size.width * 0.69f, visibleSize.height * 0.02f);
 		child2->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.4);
@@ -106,7 +106,7 @@ void HouseLayer::addHouse(int rand){
 	case 2: 
 		path = HOUSE_2_PATH; diff = 90; scaleFactor = SCALE_FACTOR; 
 		house = Sprite::create(path);
-		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.6f, visibleSize.height * 0.02f);
 		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.75);
 		
 		house->addChild(child1);
@@ -114,7 +114,7 @@ void HouseLayer::addHouse(int rand){
 	case 3: 
 		path = HOUSE_3_PATH; diff = 50; scaleFactor = SCALE_FACTOR; 
 		house = Sprite::create(path);
-		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.6f, visibleSize.height * 0.02f);
 		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.7);
 
 		house->addChild(child1);
@@ -122,7 +122,7 @@ void HouseLayer::addHouse(int rand){
 	case 4: 
 		path = HOUSE_4_PATH; diff = -20; scaleFactor = SCALE_FACTOR; 
 		house = Sprite::create(path);
-		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.6f, visibleSize.height * 0.02f);
 		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.7);
 
 		house->addChild(child1);
@@ -130,7 +130,7 @@ void HouseLayer::addHouse(int rand){
 	case 5: 
 		path = HOUSE_5_PATH; diff = -20; scaleFactor = SCALE_FACTOR; 
 		house = Sprite::create(path);
-		child1 = createOneWayNode(house->boundingBox().size.width * 0.7f, visibleSize.height * 0.02f);
+		child1 = createOneWayNode(house->boundingBox().size.width * 0.6f, visibleSize.height * 0.02f);
 		child1->setPosition(house->boundingBox().size.width * 0.5f, house->boundingBox().size.height * 0.7);
 
 		house->addChild(child1);
