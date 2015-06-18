@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "MainMenuScene.h"
-
+#include "DBContext.h"
+#include "PlayerInfo.h"
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -65,6 +66,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("story/story.ExportJson");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("dirt/dirt.ExportJson");
 
+	//init database
+	//DBContext::del(LONGEST_RUN);
+	DBContext::init();
+	PlayerInfo::updateFromDB();
+	
 	//director->setContentScaleFactor(0.50f);
     register_all_packages();
 

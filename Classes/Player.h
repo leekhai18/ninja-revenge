@@ -5,6 +5,7 @@
 #include "extensions/cocos-ext.h"
 #include "cocostudio/CocoStudio.h"
 #include "Global.h"
+#include "PlayerInfo.h"
 
 #if ENABLE_PHYSICS_BOX2D_DETECT
 #include "../../Box2DTestBed/GLES-Render.h"
