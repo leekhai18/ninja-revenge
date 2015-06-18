@@ -19,7 +19,7 @@ using namespace cocostudio;
 #define	PLAYER_JUMP_SPEED		450
 #define PLAYER_SLASH_DELAY		0.7f
 #define PLAYER_TIME_HOLDING		0.3f
-
+#define PLAYER_MAX_HP 500.0f
 class Player : public Armature
 {
 private:
@@ -88,6 +88,9 @@ public:
 	void onContactSeperate(PhysicsContact& contact);
 
 	void destroyCallback(Node* node);
+
+	int getHP();
+	int getMaxHP();
 };
 
 #endif

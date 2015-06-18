@@ -5,6 +5,15 @@
 #define BLADE_STORM_PATH "UI\\bladeStorm.png"
 #define SKILL_DISABLED_PATH "UI\\skillDisabled.png"
 
+#define HP_BAR_PATH "UI\\hpBar.png"
+#define HP_BAR_BORDER_PATH "UI\\hpBarBorder.png"
+
+#define HEAD_PATH "UI\\head.png"
+#define HEAD_ANGRY_PATH "UI\\head_angry.png"
+#define HEAD_DIE_PATH "UI\\outch.png"
+#define HP_DECREASE_DURATION 500.0f
+#define DELTA_TIME 1000.0f/60.0f
+
 
 #include "cocos2d.h"
 #include "Player.h"
@@ -24,6 +33,8 @@ private:
 	MenuItemImage* bladeStormItem;
 	CCRect *swordRect, *omiRect, *bladeRect;
 
+	Sprite *hpBarBorder, *headIcon;
+	CCProgressTimer *hpBar;
 public:
 	static HUDLayer* create();
 
@@ -35,6 +46,11 @@ public:
 	void initSwordItem();
 	void initBladeStormItem();
 	void initOmiSlashItem();
+
+	float tmpHP;
+	float hpDecRate;
+	void initHpBar();
+	void updateHpBar();
 
 	void slash(Ref* sender);
 	void omislash(Ref* sender);

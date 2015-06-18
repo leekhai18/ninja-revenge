@@ -15,7 +15,7 @@ private:
 	float		timeToRespawn;
 
 	Player*		player = nullptr;
-
+	
 	void caculateTimeToRespawn();
 	void caculateEnemyType();
 
