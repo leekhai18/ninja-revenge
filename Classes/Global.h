@@ -3,6 +3,19 @@
 
 #define DEBUG_MODE 0
 
+enum Z_ODER
+{
+	kBackGround = 0,
+	kRock,
+	kWall,
+	kHouse,
+	kBridge,
+	kPlayerShadow,
+	kEnemy,
+	kPlayer,
+	kHUD = 10
+};
+
 enum OBJECT_BISMASK
 {
 	PLAYER_MASK = 0x01,

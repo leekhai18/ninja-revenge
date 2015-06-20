@@ -3,6 +3,7 @@
 USING_NS_CC;
 
 Background* Background::instance = NULL;
+float Background::SPEED_UP = 1;
 
 Background* Background::inst(){
 	if (!instance){
@@ -17,6 +18,7 @@ void Background::setSpeed(float percent){
 	this->brigdeLayer->setLayerSpeed(GROUND_SPEED*percent);
 	this->rockLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
 	this->wallLayer->setLayerSpeed(GROUND_SPEED*percent);
+	SPEED_UP = percent;
 }
 
 BackgroundLayer* Background::createBackground(){

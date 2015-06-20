@@ -1,6 +1,9 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "SoundManager.h"
+#include "Background.h"
+
+int Enemy::NUM_OF_ENEMY_KILLED = 0;
 
 Enemy* Enemy::create(ENEMY_TYPE _type)
 {
@@ -51,7 +54,6 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 	//add collision detetion
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Enemy::onContactBegin, this);	
-	contactListener->onContactPreSolve = CC_CALLBACK_2(Enemy::onContactPreSolve, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
@@ -60,20 +62,29 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 
 void Enemy::update(float dt)
 {
-			
 	Armature::update(dt);
-	this->setPositionX(this->getPositionX() - ENEMY_SPEED * dt);
+	this->setPositionX(this->getPositionX() - ENEMY_SPEED * Background::SPEED_UP * dt);
 	if (this->getPositionX() < dictanceToSplash)
 	{
 		if (player != nullptr)
 		{
 			if (abs(this->getPositionY() - player->getPositionY()) < visibleSize.height * 0.2)
-			{
+			{				
 				if (isAttacked == false)
 				{
 					isAttacked = true;
-					this->attack();
-					player->setHit(damage);
+					if (player->getIsUseSkill1())
+					{
+						player->attack();
+					}
+					else if (player->getIsUseSkill2())
+					{
+						
+					}
+					else
+					{
+						this->attack();
+					}				
 				}
 			}
 		}
@@ -94,12 +105,16 @@ void Enemy::idle()
 
 void Enemy::attack()
 {
-	this->getAnimation()->play("Attack");
-	this->setState(ESTATE::ATTACK);	
+	if (state != ESTATE::DIE)
+	{
+		this->getAnimation()->play("Attack");
+		this->setState(ESTATE::ATTACK);
+	}	
 }
 
 void Enemy::setDie()
 {
+	NUM_OF_ENEMY_KILLED++;
 	this->getAnimation()->play("Die");
 	this->setState(ESTATE::DIE);
 	SoundManager::inst()->playDie1Effect();
@@ -112,6 +127,7 @@ void Enemy::animationEvent(Armature *armature, MovementEventType movementType, c
 		if (movementID == "Attack")
 		{
 			this->idle();
+			player->setHit(damage);
 		}
 		else if (movementID == "Die")
 		{
@@ -154,7 +170,7 @@ bool Enemy::onContactBegin(PhysicsContact& contact)
 	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
 	{
 		auto p = (Player*)a;
-		if (p->getState() == ESTATE::ATTACK || p->getIsUseSkill())
+		if (p->getState() == ESTATE::ATTACK || p->getIsUseSkill1() || p->getIsUseSkill2())
 		{
 			auto e = (Enemy*)b;
 			e->setDie();
@@ -165,68 +181,12 @@ bool Enemy::onContactBegin(PhysicsContact& contact)
 	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
 	{
 		auto p = (Player*)b;
-		if (p->getState() == ESTATE::ATTACK || p->getIsUseSkill())
+		if (p->getState() == ESTATE::ATTACK || p->getIsUseSkill1() || p->getIsUseSkill2())
 		{
 			auto e = (Enemy*)a;
 			e->setDie();
 		}
 		return false;
-	}
-
-	return false;
-}
-
-void Enemy::onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve)
-{
-	auto a = contact.getShapeA()->getBody()->getNode();
-	auto b = contact.getShapeB()->getBody()->getNode();
-	// Check collision with enemy
-	
-	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
-	{
-		auto p = (Player*)a;
-		if (p->getState() == ESTATE::ATTACK)
-		{
-			auto e = (Enemy*)b;
-			e->setDie();
-		}
-	}
-
-	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
-	{
-		auto p = (Player*)b;
-		if (p->getState() == ESTATE::ATTACK)
-		{
-			auto e = (Enemy*)a;
-			e->setDie();
-		}
-	}
-}
-
-bool Enemy::onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve)
-{
-	auto a = contact.getShapeA()->getBody()->getNode();
-	auto b = contact.getShapeB()->getBody()->getNode();
-	// Check collision with enemy
-	
-	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
-	{
-		auto p = (Player*)a;
-		if (p->getState() == ESTATE::ATTACK)
-		{
-			auto e = (Enemy*)b;
-			e->setDie();
-		}
-	}
-
-	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
-	{
-		auto p = (Player*)b;
-		if (p->getState() == ESTATE::ATTACK)
-		{
-			auto e = (Enemy*)a;
-			e->setDie();
-		}
 	}
 
 	return false;

@@ -1,4 +1,5 @@
 #include "EnemySpawn.h"
+#include "Background.h"
 
 EnemySpawn* EnemySpawn::createEnemySpawn()
 {
@@ -26,7 +27,7 @@ void EnemySpawn::initSpawn()
 
 void EnemySpawn::caculateTimeToRespawn()
 {
-	minTime = 1 / (float)level + 1;
+	minTime = 1 / (float)level + 0.5f;
 	maxTime = 3 / (float)level + 1;
 	timeToRespawn = random(minTime, maxTime);
 }
@@ -38,6 +39,8 @@ void EnemySpawn::caculateEnemyType()
 
 void EnemySpawn::setLevel(int lv)
 {
+	if (lv > 3)
+		lv = 3;
 	level = lv;
 	caculateTimeToRespawn();
 	caculateEnemyType();
@@ -51,21 +54,28 @@ void EnemySpawn::levelUp()
 void EnemySpawn::update(float dt)
 {
 	timer += dt;
-	if (timer > timeToRespawn)
+	if (timer > timeToRespawn * Background::SPEED_UP)
 	{
 		timer = 0;
 		respawn();
+	}
+
+	if (Enemy::NUM_OF_ENEMY_KILLED >= level * 20)
+	{
+		this->levelUp();
 	}
 }
 
 void EnemySpawn::respawn()
 {
 	int t = random(0, level);
+	if (t > 1)
+		t = 1;
 	ENEMY_TYPE type = ENEMY_TYPE(t);
 	Enemy* enemy = Enemy::create(type);
 	enemy->setPlayer(player);
 	enemy->setPosition(this->getPosition());
 
-	this->getParent()->addChild(enemy);
+	this->getParent()->addChild(enemy, kEnemy);
 	caculateTimeToRespawn();
 }

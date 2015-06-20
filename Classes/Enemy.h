@@ -36,6 +36,7 @@ private:
 public:
 	//static create method
 	static Enemy* create(ENEMY_TYPE _type);
+	static int NUM_OF_ENEMY_KILLED;
 
 	bool initEnemy(ENEMY_TYPE _type);
 
@@ -54,8 +55,6 @@ public:
 	//event
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
 	bool onContactBegin(PhysicsContact& contact);
-	void onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve);
-	bool onContactPreSolve(PhysicsContact& contact, PhysicsContactPreSolve& solve);
 };
 
 #endif

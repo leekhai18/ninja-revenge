@@ -1,6 +1,7 @@
 #ifndef __HUD_LAYER_H__
 #define __HUD_LAYER_H__
 
+#define SKILL1_PATH "UI\\i_skill1.png"
 #define OMISLASH_PATH "UI\\omislash.png"
 #define BLADE_STORM_PATH "UI\\bladeStorm.png"
 #define SKILL_DISABLED_PATH "UI\\skillDisabled.png"
