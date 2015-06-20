@@ -250,6 +250,7 @@ void Player::setDie()
 {
 	this->getAnimation()->play("Die");
 	this->setState(ESTATE::DIE);
+	PlayerInfo::saveToDB();
 }
 
 void Player::flashUp()

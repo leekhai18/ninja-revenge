@@ -49,6 +49,12 @@
     <ClCompile Include="..\Classes\EnemySpawn.cpp">
       <Filter>enemy</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PlayerInfo.cpp">
+      <Filter>player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DBContext.cpp">
+      <Filter>database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -99,6 +105,12 @@
     <ClInclude Include="..\Classes\EnemySpawn.h">
       <Filter>enemy</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\PlayerInfo.h">
+      <Filter>player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DBContext.h">
+      <Filter>database</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
@@ -118,6 +130,9 @@
     </Filter>
     <Filter Include="enemy">
       <UniqueIdentifier>{e9a8a43c-f15b-49c5-803c-179d06078ce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="database">
+      <UniqueIdentifier>{44d56c07-9fc1-4512-b025-baf1db042133}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
