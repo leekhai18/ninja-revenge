@@ -101,9 +101,13 @@ void HUDLayer::update(float dt)
 
 	if (player->canOmiSlash())
 		this->omislashItem->setEnabled(true);
+	else
+		this->omislashItem->setEnabled(false);
 
 	if (player->canBladeStorm())
 		this->bladeStormItem->setEnabled(true);
+	else
+		this->bladeStormItem->setEnabled(false);
 	updateHpBar();
 }
 
@@ -119,7 +123,7 @@ void HUDLayer::omislash(Ref* sender)
 {
 	if (player->canOmiSlash()){
 		omislashItem->setEnabled(false);
-		player->attack();
+		player->useOmislash();
 	}
 }
 
@@ -127,7 +131,7 @@ void HUDLayer::bladeStorm(Ref* sender)
 {
 	if (player->canBladeStorm()){
 		bladeStormItem->setEnabled(false);
-		player->attack();
+		player->useBladeStorm();
 	}
 }
 
@@ -140,7 +144,7 @@ bool HUDLayer::canJump(Vec2 touchPoint)
 		}
 	}
 
-	if (!bladeStormItem->isEnabled()){
+	/*if (!bladeStormItem->isEnabled()){
 		if (intersect(bladeRect, touchPoint))
 		{
 			return false;
@@ -152,7 +156,8 @@ bool HUDLayer::canJump(Vec2 touchPoint)
 		{
 			return false;
 		}
-	}
+	}*/
+	return true;
 }
 
 void HUDLayer::initSwordItem()
@@ -194,7 +199,7 @@ void HUDLayer::initBladeStormItem()
 void HUDLayer::initOmiSlashItem()
 {
 	omislashItem = MenuItemImage::create(
-		OMISLASH_PATH,
+		SKILL1_PATH,
 		SKILL_DISABLED_PATH,
 		CC_CALLBACK_1(HUDLayer::omislash, this));
 	omislashItem->setPosition(swordItem->getPosition().x - swordItem->getContentSize().width / 2 - omislashItem->getContentSize().width / 2 - 3,

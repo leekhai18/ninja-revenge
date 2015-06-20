@@ -22,6 +22,7 @@ private:
 	
 public:
 	static Background* inst();
+	static float SPEED_UP;
 
 	BackgroundLayer* createBackground();
 	HouseLayer* createHouse();

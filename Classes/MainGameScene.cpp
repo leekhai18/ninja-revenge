@@ -54,13 +54,13 @@ bool MainGame::init()
 	this->addChild(Background::inst()->createWall());
 	this->addChild(Background::inst()->createHouse());
 	this->addChild(Background::inst()->createBrigde());
-	Background::inst()->setSpeed(1.0f);
+	Background::inst()->setSpeed(2.0f);
 
 	Player* player = Player::create();
 	//player->run();
 	player->setPosition(Vec2( 0, visibleSize.height * 0.7 + origin.y));
 	player->runAction(MoveBy::create(2, Vec2(visibleSize.width * 0.2f, 0)));
-	this->addChild(player, 1);
+	this->addChild(player, kPlayer);
 
 	EnemySpawn* enemySpaw = EnemySpawn::createEnemySpawn();
 	enemySpaw->setPlayer(player);
@@ -69,7 +69,7 @@ bool MainGame::init()
 
 	HUDLayer* hud = HUDLayer::create();
 	hud->setPlayer(player);
-	this->addChild(hud);
+	this->addChild(hud, kHUD);
     
     return true;
 }

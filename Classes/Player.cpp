@@ -2,9 +2,9 @@
 #include "Global.h"
 #include "Enemy.h"
 #include "SoundManager.h"
+#include "Background.h"
 
-Player::Player() : Armature(), isJumping(false), canFlash(false), flashPositionY(0),
-isOnGround(false), groundPosition(0), canUseSkill1(true), timeUseSkill1(0), timeToAddNewShadow(0)
+Player::Player() : Armature()
 {
 	
 }
@@ -33,6 +33,7 @@ Player* Player::create()
 
 bool Player::initPlayer()
 {
+	visisbleSize = Director::getInstance()->getVisibleSize();
 	this->setTag(OBJECT_TAG::PLAYER_TAG);
 	this->setName("Player");
 
@@ -53,7 +54,6 @@ bool Player::initPlayer()
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Player::onContactBegin, this);
 	contactListener->onContactSeperate = CC_CALLBACK_1(Player::onContactSeperate, this);
-	contactListener->onContactPostSolve = CC_CALLBACK_2(Player::onContactPostSolve, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
@@ -65,9 +65,9 @@ bool Player::initPlayer()
 void Player::update(float dt)
 {
 	Armature::update(dt);
-	if (timeDelayAttack > 0)
+	if (timeDelayAttack <= PLAYER_SLASH_DELAY)
 	{
-		timeDelayAttack -= dt;
+		timeDelayAttack += dt;
 	}
 
 	if (isHolding && (state == ESTATE::JUMP || state == ESTATE::JUMP2 ))
@@ -87,12 +87,29 @@ void Player::update(float dt)
 
 	if (canUseSkill1)
 	{
-		timeUseSkill1 += dt;
-		if (timeUseSkill1 >= PLAYER_TIME_USE_SKILL1)
+		
+	}
+	else
+	{
+		timeCoolDownSkill1 += dt;
+		if (timeCoolDownSkill1 >= PLAYER_SKILL1_COOLDOWN)
+		{
+			canUseSkill1 = true;
+			timeCoolDownSkill1 = 0;
+		}
+	}
+
+	if (isUsingSkill1)
+	{
+		timeOfSkill1 += dt;
+		if (timeOfSkill1 >= PLAYER_TIME_USE_SKILL1)
 		{
 			state = ESTATE::RUN;
 			canUseSkill1 = false;
-			timeUseSkill1 = 0;
+			isUsingSkill1 = false;
+			timeOfSkill1 = 0;
+			timeCoolDownSkill1 = 0;
+			Background::inst()->setSpeed(1);
 		}
 		else
 		{
@@ -104,44 +121,85 @@ void Player::update(float dt)
 			}
 		}
 	}
+
+	if (canUseSkill2)
+	{
+
+	}
+	else
+	{
+		timeCoolDownSkill2 += dt;
+		if (timeCoolDownSkill2 >= PLAYER_SKILL2_COOLDOWN)
+		{
+			canUseSkill2 = true;
+			timeCoolDownSkill2 = 0;
+		}
+	}
+
+	if (isUsingSkill2)
+	{
+		timeOfSkill2 += dt;
+		if (timeOfSkill2 >= PLAYER_TIME_USE_SKILL2)
+		{
+			state = ESTATE::RUN;
+			canUseSkill2 = false;
+			isUsingSkill2 = false;
+			timeOfSkill2 = 0;
+			timeCoolDownSkill2 = 0;
+			Background::inst()->setSpeed(1);
+			this->stopAllActions();
+			this->run();
+			this->setPositionY(groundPosition);
+		}
+		else
+		{
+			
+		}
+	}
 }
 
 void Player::run()
 {
-	this->getAnimation()->play("Run", 0, 1);
-	this->setState(ESTATE::RUN);
-	SoundManager::inst()->playFootStepEffect(true);	
+	if (!isUsingSkill2)
+	{
+		this->getAnimation()->play("Run", 0, 1);
+		this->setState(ESTATE::RUN);
+		SoundManager::inst()->playFootStepEffect(true);
+	}
 }
 
 void Player::jump()
 {
-	if (!isJumping && (state == ESTATE::RUN || state == ESTATE::ATTACK)) {
-		SoundManager::inst()->playJumpEffect();
-		dirtPlay();
-		timeHolding = PLAYER_TIME_HOLDING;
-		isHolding = true;
-		auto vel = getPhysicsBody()->getVelocity();
-		vel.y = PLAYER_JUMP_SPEED;	
-		getPhysicsBody()->setVelocity(vel);
-		getPhysicsBody()->setGravityEnable(true);
-		isOnGround = false;
-		this->getAnimation()->play("Jump");		
-		this->setState(ESTATE::JUMP);
-		isJumping = true;
-	}
-	else
+	if (!isUsingSkill2)
 	{
-		if (isJumping && state == ESTATE::JUMP) {
+		if (!isJumping && (state == ESTATE::RUN || state == ESTATE::ATTACK)) {
 			SoundManager::inst()->playJumpEffect();
+			dirtPlay();
 			timeHolding = PLAYER_TIME_HOLDING;
 			isHolding = true;
 			auto vel = getPhysicsBody()->getVelocity();
 			vel.y = PLAYER_JUMP_SPEED;
 			getPhysicsBody()->setVelocity(vel);
-			this->getAnimation()->play("Jump2");
-			this->setState(ESTATE::JUMP2);	
+			getPhysicsBody()->setGravityEnable(true);
+			isOnGround = false;
+			this->getAnimation()->play("Jump");
+			this->setState(ESTATE::JUMP);
+			isJumping = true;
 		}
-	}
+		else
+		{
+			if (isJumping && state == ESTATE::JUMP) {
+				SoundManager::inst()->playJumpEffect();
+				timeHolding = PLAYER_TIME_HOLDING;
+				isHolding = true;
+				auto vel = getPhysicsBody()->getVelocity();
+				vel.y = PLAYER_JUMP_SPEED;
+				getPhysicsBody()->setVelocity(vel);
+				this->getAnimation()->play("Jump2");
+				this->setState(ESTATE::JUMP2);
+			}
+		}
+	}	
 }
 
 void Player::setHold(bool val)
@@ -151,10 +209,10 @@ void Player::setHold(bool val)
 
 void Player::attack()
 {
-	if (timeDelayAttack <= 0)
+	if (timeDelayAttack >= PLAYER_SLASH_DELAY && !isUsingSkill2)
 	{
 		SoundManager::inst()->playSlash1Effect();
-		timeDelayAttack = PLAYER_SLASH_DELAY;
+		timeDelayAttack = 0;
 		int rand = random(1, 2);
 		std::string animName = "Attack";
 		std::string number = std::to_string(rand);
@@ -165,29 +223,26 @@ void Player::attack()
 
 void Player::useOmislash()
 {
-	if (timeDelayAttack <= 0)
+	if (canUseSkill1)
 	{
-		SoundManager::inst()->playSlash1Effect();
-		timeDelayAttack = PLAYER_SLASH_DELAY;
-		int rand = random(1, 2);
-		std::string animName = "Attack";
-		std::string number = std::to_string(rand);
-		this->getAnimation()->play(animName + number);
-		this->setState(ESTATE::ATTACK);
+		Background::inst()->setSpeed(1.5f);	
+		isUsingSkill1 = true;
+		canUseSkill1 = false;
 	}
 }
 
 void Player::useBladeStorm()
 {
-	if (timeDelayAttack <= 0)
+	if (canUseSkill2)
 	{
-		SoundManager::inst()->playSlash1Effect();
-		timeDelayAttack = PLAYER_SLASH_DELAY;
-		int rand = random(1, 2);
-		std::string animName = "Attack";
-		std::string number = std::to_string(rand);
-		this->getAnimation()->play(animName + number);
-		this->setState(ESTATE::ATTACK);
+		Background::inst()->setSpeed(1.7f);
+		state = ESTATE::SKILL2;
+		isUsingSkill2 = true;
+		canUseSkill2 = false;
+		this->getAnimation()->play("Skill2");
+		this->runAction(RepeatForever::create(Sequence::create(MoveTo::create(0.5f, Vec2(this->getPositionX(), visisbleSize.height * 0.9f)),
+			MoveTo::create(0.5f, Vec2(this->getPositionX(), visisbleSize.height * 0.1f)),
+			nullptr)));
 	}
 }
 
@@ -240,10 +295,14 @@ void Player::addAShadow()
 	this->getParent()->addChild(shadow, 0);
 }
 
-void Player::setSkill1()
+void Player::useSkill1()
 {
-	state = ESTATE::SKILL1;
-	canUseSkill1 = true;
+	if (canUseSkill1 && !isUsingSkill2)
+	{
+		state = ESTATE::SKILL1;
+		isUsingSkill1 = true;
+		canUseSkill1 = false;
+	}
 }
 
 void Player::dirtPlay()
@@ -336,8 +395,7 @@ bool Player::onContactBegin(PhysicsContact& contact)
 
 	// Check collision player with house
 	if (a->getTag() == OBJECT_TAG::HOUSE_TAG)
-	{	
-		CCLOG("HAIZ %f", a->getBoundingBox().size.height);
+	{			
 		if (b->getTag() == OBJECT_TAG::PLAYER_TAG)
 		{
 			canFlash = true;
@@ -348,8 +406,7 @@ bool Player::onContactBegin(PhysicsContact& contact)
 	}
 
 	if (b->getTag() == OBJECT_TAG::HOUSE_TAG)
-	{
-		CCLOG("HAIZ %f", a->getBoundingBox().size.height);
+	{		
 		if (a->getTag() == OBJECT_TAG::PLAYER_TAG)
 		{
 			canFlash = true;
@@ -362,7 +419,7 @@ bool Player::onContactBegin(PhysicsContact& contact)
 	// Check collision with enemy
 	if ((a->getTag() == OBJECT_TAG::PLAYER_TAG && b->getTag() == OBJECT_TAG::ENEMY_TAG))
 	{
-		if (this->getState() == ESTATE::ATTACK || this->getIsUseSkill())
+		if (this->getState() == ESTATE::ATTACK || this->getIsUseSkill1())
 		{
 			auto e = (Enemy*)b;
 			e->setDie();
@@ -372,7 +429,7 @@ bool Player::onContactBegin(PhysicsContact& contact)
 
 	if ((b->getTag() == OBJECT_TAG::PLAYER_TAG && a->getTag() == OBJECT_TAG::ENEMY_TAG))
 	{
-		if (this->getState() == ESTATE::ATTACK || this->getIsUseSkill())
+		if (this->getState() == ESTATE::ATTACK || this->getIsUseSkill1())
 		{
 			auto e = (Enemy*)a;
 			e->setDie();
@@ -406,6 +463,8 @@ void Player::onContactSeperate(PhysicsContact& contact)
 	// Check collision player with house
 	if (a->getTag() == OBJECT_TAG::HOUSE_TAG)
 	{
+		if (isUsingSkill2)
+			return;
 		//if (b->getTag() == OBJECT_TAG::PLAYER_TAG == 0)
 		{
 			if (this->getPositionY() > groundPosition + 100 && isOnGround == true)
@@ -413,13 +472,14 @@ void Player::onContactSeperate(PhysicsContact& contact)
 				getPhysicsBody()->setGravityEnable(true);
 				isOnGround = false;
 			}
-			canFlash = false;	
-			CCLOG("FUCK %f", a->getBoundingBox().size.height);
+			canFlash = false;		
 		}
 	}
 
 	if (b->getTag() == OBJECT_TAG::HOUSE_TAG)
 	{
+		if (isUsingSkill2)
+			return;
 		//if (a->getTag() == OBJECT_TAG::PLAYER_TAG == 0)
 		{
 			if (this->getPositionY() > groundPosition + 100 && isOnGround == true)
@@ -427,18 +487,11 @@ void Player::onContactSeperate(PhysicsContact& contact)
 				getPhysicsBody()->setGravityEnable(true);
 				isOnGround = false;
 			}
-			canFlash = false;
-			CCLOG("FUCK you %f", a->getBoundingBox().size.height);
+			canFlash = false;			
 		}
 	}
 }
 
-void Player::onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve)
-{
-	auto a = contact.getShapeA()->getBody()->getNode();
-	auto b = contact.getShapeB()->getBody()->getNode();
-
-}
 
 void Player::destroyCallback(Node* node)
 {
@@ -447,18 +500,17 @@ void Player::destroyCallback(Node* node)
 
 bool Player::canAttack()
 {
-	
-	return this->timeDelayAttack < 0;
+	return this->timeDelayAttack > PLAYER_SLASH_DELAY;
 }
 
 bool Player::canBladeStorm()
 {
-	return this->timeDelayAttack < 0;
+	return canUseSkill2;
 }
 
 bool Player::canOmiSlash()
 {
-	return this->timeDelayAttack < 0;
+	return canUseSkill1;
 }
 
 int Player::getHP()

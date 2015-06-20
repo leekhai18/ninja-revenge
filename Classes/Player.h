@@ -21,36 +21,43 @@ using namespace cocostudio;
 #define PLAYER_SLASH_DELAY		0.7f
 #define PLAYER_TIME_HOLDING		0.3f
 #define PLAYER_TIME_USE_SKILL1	10.0f
-#define PLAYER_MAX_HP 500.0f
+#define PLAYER_TIME_USE_SKILL2	10.0f
+#define PLAYER_MAX_HP			500.0f
+#define PLAYER_SKILL1_COOLDOWN	12
+#define PLAYER_SKILL2_COOLDOWN	12
 
 class Player : public Armature
 {
 private:
-	bool		isJumping;
-	float		timeDelayAttack;
-	bool		isHolding;
-	float		timeHolding;
+	Size		visisbleSize;
+	bool		isJumping			= false;
+	float		timeDelayAttack		= 0;
+	bool		isHolding			= false;
+	float		timeHolding			= 0;
 
-	float		flashPositionY;
-	bool		canFlash;
-	bool		isOnGround;
-	float		groundPosition;
+	float		flashPositionY		= 0;
+	bool		canFlash			= false;
+	bool		isOnGround			= false;
+	float		groundPosition		= 0;
 
-	bool		canUseSkill1;
-	float		timeUseSkill1;
-	float		timeToAddNewShadow;
+	bool		canUseSkill1		= false;
+	bool		isUsingSkill1		= false;
+	float		timeToAddNewShadow	= 0;
+
+	bool		canUseSkill2		= false;
+	bool		isUsingSkill2		= false;
 
 	//properties of player
 	float		jumpSpeed;
 	float		acttackSpeed;
 	int			maxHitPoint;
-	int			hitPoint = 500;
+	int			hitPoint			= 500;
 	
-	float		timeCoolDownSkill1;
-	float		timeOfSkill1;
+	float		timeCoolDownSkill1	= 0;
+	float		timeOfSkill1		= 0;
 
-	float		timeCoolDownSkill2;
-	float		timeOfSkill2;
+	float		timeCoolDownSkill2	= 0;
+	float		timeOfSkill2		= 0;
 
 public:
 	//static create method
@@ -76,8 +83,6 @@ public:
 
 	void attack();
 	void setDie();
-	void useOmislash();
-	void useBladeStorm();
 
 	void flashUp();
 	void flashDown();
@@ -85,8 +90,14 @@ public:
 
 	//skill 1
 	void addAShadow();
-	void setSkill1();
-	bool getIsUseSkill() { return canUseSkill1; }
+	void useOmislash();
+	void useSkill1();
+	bool getIsUseSkill1() { return isUsingSkill1; }
+
+	//skill 2
+	void useBladeStorm();
+	bool getIsUseSkill2() { return isUsingSkill2; }
+
 	void dirtPlay();
 
 	bool canAttack();
@@ -97,7 +108,6 @@ public:
 	void animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID);
 	bool onContactBegin(PhysicsContact& contact);
 	void onContactSeperate(PhysicsContact& contact);
-	void onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve);
 
 	void destroyCallback(Node* node);
 
