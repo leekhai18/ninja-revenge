@@ -55,7 +55,7 @@ bool MainGame::init()
 	this->addChild(Background::inst()->createWall());
 	this->addChild(Background::inst()->createHouse());
 	this->addChild(Background::inst()->createBrigde());
-	Background::inst()->setSpeed(1.0f);
+	Background::inst()->setSpeed(2.0f);
 
 	Player* player = Player::create();
 	//player->run();
