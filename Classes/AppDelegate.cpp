@@ -35,7 +35,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::create("Ninja Revenge");
+		glview = GLViewImpl::createWithRect("Ninja Revenge", Rect(0, 0, 780, 420));
         director->setOpenGLView(glview);
     }
 
@@ -46,7 +46,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
 	auto screenSize = glview->getFrameSize();
-	auto designSize = Size(480, 320);
+	auto designSize = Size(960, 640);
+	// Set the design resolution
+	glview->setDesignResolutionSize(designSize.width, designSize.height, kResolutionExactFit);
 
 	auto fileUtils = FileUtils::getInstance();
 	std::vector<std::string> searchPaths;
