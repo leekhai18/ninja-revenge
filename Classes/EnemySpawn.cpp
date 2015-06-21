@@ -53,6 +53,8 @@ void EnemySpawn::levelUp()
 
 void EnemySpawn::update(float dt)
 {
+	if (Global::isPause)
+		return;
 	timer += dt;
 	if (timer > timeToRespawn * Background::SPEED_UP)
 	{

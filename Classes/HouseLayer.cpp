@@ -64,6 +64,7 @@ Node* HouseLayer::createOneWayNode(float width, float height)
 }
 
 void HouseLayer::update(float delta){
+
 	if (house->getPosition().x < - house->getContentSize().width - random(100, 1000)){
 		this->addHouse(random(1, 5));
 	}

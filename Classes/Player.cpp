@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "SoundManager.h"
 #include "Background.h"
+#include "Blood.h"
 
 Player::Player() : Armature()
 {
@@ -64,6 +65,8 @@ bool Player::initPlayer()
 
 void Player::update(float dt)
 {
+	if (Global::isPause)
+		return;
 	Armature::update(dt);
 	if (timeDelayAttack <= PLAYER_SLASH_DELAY)
 	{
@@ -278,6 +281,9 @@ void Player::setHit(int damage)
 	{
 		this->setDie();
 	}
+	auto blood = Blood::createBlood();
+	blood->setPosition(visisbleSize.width * 0.5f, visisbleSize.height * 0.5f);
+	this->getParent()->addChild(blood);
 }
 
 void Player::addAShadow()

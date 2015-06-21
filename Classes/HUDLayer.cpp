@@ -1,6 +1,10 @@
 #include "HUDLayer.h"
+#include "ui\CocosGUI.h"
+#include "Dialog.h"
+#include "Background.h"
 
 USING_NS_CC;
+using namespace ui;
 
 HUDLayer* HUDLayer::create()
 {
@@ -73,6 +77,31 @@ bool HUDLayer::init()
 
 	// Add listener
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener1, this);
+
+	auto pauseBtn = Button::create("UI\\b_pause.png");
+	pauseBtn->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			auto dialog = PauseDialog::createPauseDialog();
+			dialog->setPosition(visibleSize.width * 0.5, visibleSize.height *0.4);
+			dialog->setScale(0.6);
+			this->addChild(dialog);
+
+			Global::isPause = true;
+			Background::inst()->setSpeed(0);
+			break;
+		}
+	});
+	
+	pauseBtn->setPosition(Vec2(visibleSize.width - pauseBtn->getSize().width * 0.5, visibleSize.height - pauseBtn->getSize().height *0.5));
+	this->addChild(pauseBtn);
+
+	auto coin = Sprite::create("UI\\coin2.png");
+	coin->setPosition(coin->getContentSize().width * 0.5 + visibleSize.width * 0.038, visibleSize.height * 0.715);
+	this->addChild(coin);
 
 	this->scheduleUpdate();
 	return true;

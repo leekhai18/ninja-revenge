@@ -46,6 +46,7 @@ bool BrigdeLayer::init()
 }
 
 void BrigdeLayer::update(float delta){
+
 	if (brigde == nullptr)
 		return;
 	int x = brigde->getPosition().x;

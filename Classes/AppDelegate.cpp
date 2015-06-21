@@ -65,6 +65,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("enemy2/enemy2.ExportJson");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("story/story.ExportJson");
 	ArmatureDataManager::getInstance()->addArmatureFileInfo("dirt/dirt.ExportJson");
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("dialog/Dialog.ExportJson");
 
 	//init database
 	//DBContext::del(LONGEST_RUN);

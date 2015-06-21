@@ -36,6 +36,7 @@ private:
 
 	Sprite *hpBarBorder, *headIcon;
 	CCProgressTimer *hpBar;
+
 public:
 	static HUDLayer* create();
 

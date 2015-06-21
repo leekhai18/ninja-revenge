@@ -31,6 +31,7 @@ bool Story::init()
 	auto story = Armature::create("story");
 	story->setPosition(visibleSize.width * 0.5f + origin.x, visibleSize.height * 0.5f + origin.y);
 	story->getAnimation()->play("Appear");
+	story->getAnimation()->setSpeedScale(0.7f);
 	this->addChild(story);
 
 	//add event listener

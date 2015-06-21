@@ -3,6 +3,8 @@
 bool Global::instanceFlag = false;
 Global* Global::instance = nullptr;
 
+bool Global::isPause = false;
+
 void Global::init()
 {
 	//init something

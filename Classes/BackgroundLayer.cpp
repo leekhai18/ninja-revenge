@@ -1,4 +1,5 @@
 #include "BackgroundLayer.h"
+#include "Global.h"
 
 USING_NS_CC;
 BackgroundLayer* BackgroundLayer::instance = NULL;
@@ -71,6 +72,7 @@ bool BackgroundLayer::init()
 }
 
 void BackgroundLayer::update(float delta){
+
 	for (Sprite* &house : houses){
 		if (house->getPosition().x < -house->getContentSize().width){			
 			int currentTag = house->getTag();

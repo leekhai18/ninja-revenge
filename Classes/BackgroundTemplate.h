@@ -4,6 +4,7 @@
 
 #define BG_N_HOUSE 4
 #include "cocos2d.h"
+#include "Global.h"
 //#include "WallLayer.h"
 
 class BackgroundTemplate : public cocos2d::Layer

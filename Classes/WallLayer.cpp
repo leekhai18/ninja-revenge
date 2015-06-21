@@ -63,6 +63,9 @@ bool WallLayer::init()
 }
 
 void WallLayer::update(float delta){
+	if (Global::isPause)
+		return;
+
 	for (auto &wall : walls){
 		if (wall->getPosition().x < - WALL_WIDTH){
 			int tag = wall->getTag() == 0 ? N_WALL - 1 : wall->getTag() - 1;

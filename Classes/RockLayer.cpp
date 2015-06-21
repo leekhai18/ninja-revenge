@@ -50,6 +50,7 @@ bool RockLayer::init()
 }
 
 void RockLayer::update(float delta){
+
 	if (rock->getPosition().x < -400){
 		this->removeChild(rock);
 
