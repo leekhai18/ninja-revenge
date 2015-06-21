@@ -107,7 +107,7 @@ void PauseDialog::initPauseDialog()
 		{
 		case ui::Widget::TouchEventType::BEGAN:
 			break;
-		case ui::Widget::TouchEventType::ENDED:
+		case ui::Widget::TouchEventType::ENDED:			
 			this->getAnimation()->play("Disappear", 0);
 			this->runAction(Sequence::create(DelayTime::create(1), CallFunc::create(CC_CALLBACK_0(PauseDialog::onRetry, this, this)), nullptr));
 			break;
@@ -122,7 +122,7 @@ void PauseDialog::initPauseDialog()
 		{
 		case ui::Widget::TouchEventType::BEGAN:
 			break;
-		case ui::Widget::TouchEventType::ENDED:
+		case ui::Widget::TouchEventType::ENDED:			
 			this->getAnimation()->play("Disappear", 0);
 			this->runAction(Sequence::create(DelayTime::create(1), CallFunc::create(CC_CALLBACK_0(PauseDialog::onHome, this, this)), nullptr));
 			break;
@@ -150,6 +150,75 @@ void PauseDialog::onRetry(Node* node)
 }
 
 void PauseDialog::onHome(Node* node)
+{
+	node->getParent()->removeChild(node);
+	Global::isPause = false;
+	Director::getInstance()->replaceScene(MainMenuScene::createScene());
+	Background::inst()->setSpeed(1);
+}
+
+DieDialog* DieDialog::createDieDialog()
+{
+	DieDialog* die = new DieDialog();
+	if (die && die->init("Dialog"))
+	{
+		die->initDieDialog();
+		die->autorelease();
+		return die;
+	}
+	CC_SAFE_DELETE(die);
+	return nullptr;
+}
+
+void DieDialog::initDieDialog()
+{
+	auto header = Sprite::create("UI\\h_die.png");
+
+	auto contain = Node::create();
+	auto size = Sprite::create("UI\\bg_content.png")->getContentSize();
+
+	auto retry = Button::create("UI\\b_tryagain.png");
+	retry->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:			
+			this->getAnimation()->play("Disappear", 0);
+			this->runAction(Sequence::create(DelayTime::create(1), CallFunc::create(CC_CALLBACK_0(DieDialog::onRetry, this, this)), nullptr));
+			break;
+		}
+	});
+
+	contain->addChild(retry);
+
+	auto home = Button::create("UI\\b_home.png");
+	home->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:			
+			this->getAnimation()->play("Disappear", 0);
+			this->runAction(Sequence::create(DelayTime::create(1), CallFunc::create(CC_CALLBACK_0(DieDialog::onHome, this, this)), nullptr));
+			break;
+		}
+	});
+	home->setPositionY(-size.height*0.15);
+	contain->addChild(home);
+
+	this->initDialog(header, contain);
+}
+
+void DieDialog::onRetry(Node* node)
+{
+	node->getParent()->removeChild(node);
+	Global::isPause = false;
+	Director::getInstance()->replaceScene(Story::createScene());
+	Background::inst()->setSpeed(1);
+}
+
+void DieDialog::onHome(Node* node)
 {
 	node->getParent()->removeChild(node);
 	Global::isPause = false;

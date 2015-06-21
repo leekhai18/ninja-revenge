@@ -1,4 +1,6 @@
 #include "StoryScene.h"
+#include "Global.h"
+#include "Background.h"
 
 Scene* Story::createScene()
 {
@@ -57,7 +59,8 @@ bool Story::init()
 void Story::nextScene()
 {
 	auto scene = MainGame::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(1, scene, Color3B(0, 0, 0)));
+	Director::getInstance()->replaceScene(TransitionFade::create(1, scene, Color3B(0, 0, 0)));	
+	Background::inst()->setSpeed(1);
 }
 
 void Story::animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)

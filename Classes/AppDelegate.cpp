@@ -54,6 +54,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	searchPaths.push_back("hd");
 	searchPaths.push_back("hd/animations");
 	searchPaths.push_back("hd/sprites");
+	searchPaths.push_back("hd/fonts");
 	searchPaths.push_back("x2");
 	searchPaths.push_back("sound");
 	

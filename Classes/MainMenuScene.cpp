@@ -112,7 +112,7 @@ bool MainMenuScene::init()
 	this->addChild(menu, 1);
 
 	this->createTable();
-	//SoundManager::inst()->playBackgroundTheme(true);
+	SoundManager::inst()->playBackgroundTheme(true);
 
 	//this->showTable();
 	//std::vector<std::string> lines;

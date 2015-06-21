@@ -103,6 +103,34 @@ bool HUDLayer::init()
 	coin->setPosition(coin->getContentSize().width * 0.5 + visibleSize.width * 0.038, visibleSize.height * 0.715);
 	this->addChild(coin);
 
+	lbGold = Label::createWithBMFont("an24.fnt", "0");
+	lbGold->setColor(Color3B(Color4F::YELLOW));
+	lbGold->setPosition(coin->getPositionX() + coin->getContentSize().width, coin->getPositionY());
+	this->addChild(lbGold);
+
+	lbDistance = Label::createWithBMFont("an32.fnt", "0");
+	lbDistance->setPosition(coin->getPositionX() + visibleSize.width * 0.25, coin->getPositionY() + coin->getContentSize().height * 1.3);
+	this->addChild(lbDistance);
+
+	sprHit = Sprite::create("UI\\t_hit.png");
+	sprHit->setPositionX(sprHit->getContentSize().width * 0.5);
+
+	sprHits = Sprite::create("UI\\t_hits.png");
+	sprHits->setPositionX(sprHits->getContentSize().width * 0.5);
+	sprHits->setVisible(false);
+
+	lbCombo = Label::createWithBMFont("number72.fnt", "1 Hit");
+	lbCombo->setPositionX(-sprHits->getContentSize().width * 0.25);
+	lbCombo->setColor(Color3B(Color4F::RED));
+
+	auto comboNode = Node::create();
+	comboNode->addChild(lbCombo);
+	comboNode->addChild(sprHit);
+	comboNode->addChild(sprHits);
+	comboNode->setRotation(-30);
+	comboNode->setPosition(visibleSize.width * 0.8, visibleSize.height * 0.5);
+	this->addChild(comboNode);
+
 	this->scheduleUpdate();
 	return true;
 }
@@ -138,6 +166,38 @@ void HUDLayer::update(float dt)
 	else
 		this->bladeStormItem->setEnabled(false);
 	updateHpBar();
+	
+	char stringGold[12] = { 0 };
+	sprintf(stringGold, "x %d", player->getGold());
+	lbGold->setString(stringGold);
+
+	char stringDistance[12] = { 0 };
+	sprintf(stringDistance, "%d", (int)player->getDistance());
+	lbDistance->setString(stringDistance);
+
+	if (player->getCombo() > 0)
+	{
+		if (player->getCombo() > 1)
+		{
+			sprHit->setVisible(false);
+			sprHits->setVisible(true);
+		}
+		else
+		{
+			sprHit->setVisible(true);
+			sprHits->setVisible(false);
+		}
+		char stringCombo[12] = { 0 };
+		sprintf(stringCombo, "%d", (int)player->getCombo());
+		lbCombo->setString(stringCombo);
+	}
+	else
+	{
+		sprHit->setVisible(false);
+		sprHits->setVisible(false);
+		lbCombo->setString("");
+	}
+	
 }
 
 void HUDLayer::slash(Ref* sender)

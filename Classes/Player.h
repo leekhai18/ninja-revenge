@@ -22,9 +22,9 @@ using namespace cocostudio;
 #define PLAYER_TIME_HOLDING		0.3f
 #define PLAYER_TIME_USE_SKILL1	10.0f
 #define PLAYER_TIME_USE_SKILL2	10.0f
-#define PLAYER_MAX_HP			500.0f
-#define PLAYER_SKILL1_COOLDOWN	12
-#define PLAYER_SKILL2_COOLDOWN	12
+#define PLAYER_MAX_HP			200.0f
+#define PLAYER_SKILL1_COOLDOWN	20
+#define PLAYER_SKILL2_COOLDOWN	30
 
 class Player : public Armature
 {
@@ -51,7 +51,7 @@ private:
 	float		jumpSpeed;
 	float		acttackSpeed;
 	int			maxHitPoint;
-	int			hitPoint			= 500;
+	int			hitPoint			= 200;
 	
 	float		timeCoolDownSkill1	= 0;
 	float		timeOfSkill1		= 0;
@@ -75,7 +75,9 @@ public:
 
 	//get & set method || SYNTHESIZE
 	CC_SYNTHESIZE(ESTATE, state, State);
-
+	CC_SYNTHESIZE(float, distance, Distance);
+	CC_SYNTHESIZE(int, gold, Gold);
+	CC_SYNTHESIZE(int, combo, Combo);
 	//behavior
 	void run();
 	void jump();

@@ -30,7 +30,7 @@ public:
 	WallLayer* createWall();
 	BrigdeLayer* createBrigde();
 
-	void setSpeed(float percent);
+	void setSpeed(float percent);	
 };
 
 #endif 

@@ -146,10 +146,15 @@ void Enemy::attack()
 
 void Enemy::setDie()
 {
-	NUM_OF_ENEMY_KILLED++;
-	this->getAnimation()->play("Die");
-	this->setState(ESTATE::DIE);
-	SoundManager::inst()->playDie1Effect();
+	if (state != ESTATE::DIE)
+	{
+		NUM_OF_ENEMY_KILLED++;
+		player->setGold(player->getGold() + this->gold);
+		player->setCombo(player->getCombo() + 1);
+		this->getAnimation()->play("Die");
+		this->setState(ESTATE::DIE);
+		SoundManager::inst()->playDie1Effect();
+	}
 }
 
 void Enemy::animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)

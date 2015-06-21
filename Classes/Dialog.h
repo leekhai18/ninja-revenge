@@ -35,4 +35,17 @@ public:
 	void onRetry(Node* node);
 	void onHome(Node* node);
 };
+
+class DieDialog : public Dialog
+{
+private:
+
+public:
+	static DieDialog* createDieDialog();
+
+	void initDieDialog();
+	void onResume(Node* node);
+	void onRetry(Node* node);
+	void onHome(Node* node);
+};
 #endif
