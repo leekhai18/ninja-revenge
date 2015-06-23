@@ -7,3 +7,7 @@ void BackgroundTemplate::setLayerSpeed(float speed){
 	this->layerSpeed = speed;
 }
 
+float BackgroundTemplate::getLayerSpeed(){
+	return this->layerSpeed;
+}
+

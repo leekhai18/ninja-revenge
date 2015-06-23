@@ -197,7 +197,7 @@ void HUDLayer::update(float dt)
 		sprHits->setVisible(false);
 		lbCombo->setString("");
 	}
-	
+	Background::inst()->update(dt);
 }
 
 void HUDLayer::slash(Ref* sender)

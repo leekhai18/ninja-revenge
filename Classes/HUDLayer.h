@@ -18,7 +18,7 @@
 
 #include "cocos2d.h"
 #include "Player.h"
-
+#include "Background.h"
 class HUDLayer : public cocos2d::Layer
 {
 private:

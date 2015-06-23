@@ -18,7 +18,16 @@ void Background::setSpeed(float percent){
 	this->brigdeLayer->setLayerSpeed(GROUND_SPEED*percent);
 	this->rockLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
 	this->wallLayer->setLayerSpeed(GROUND_SPEED*percent);
+	this->acceleration = percent;
 	SPEED_UP = percent;
+}
+
+void Background::update(float delta){
+	this->accelTime += delta;
+	if (this->accelTime > 0.1f){
+		this->setSpeed(this->acceleration + 0.03f);
+		accelTime = 0.0f;
+	}
 }
 
 BackgroundLayer* Background::createBackground(){

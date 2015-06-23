@@ -19,7 +19,7 @@ private:
 	BrigdeLayer* brigdeLayer;
 	RockLayer* rockLayer;
 	static Background* instance;
-	
+	float acceleration = 0.0f, accelTime=0.0f;
 public:
 	static Background* inst();
 	static float SPEED_UP;
@@ -30,6 +30,7 @@ public:
 	WallLayer* createWall();
 	BrigdeLayer* createBrigde();
 
+	void update(float delta);
 	void setSpeed(float percent);	
 };
 
