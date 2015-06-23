@@ -145,8 +145,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Background.cpp" />
     <ClCompile Include="..\Classes\BackgroundLayer.cpp" />
     <ClCompile Include="..\Classes\BackgroundTemplate.cpp" />
+    <ClCompile Include="..\Classes\Blood.cpp" />
     <ClCompile Include="..\Classes\BrigdeLayer.cpp" />
     <ClCompile Include="..\Classes\DBContext.cpp" />
+    <ClCompile Include="..\Classes\Dialog.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\EnemySpawn.cpp" />
     <ClCompile Include="..\Classes\Global.cpp" />
@@ -170,8 +172,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Background.h" />
     <ClInclude Include="..\Classes\BackgroundLayer.h" />
     <ClInclude Include="..\Classes\BackgroundTemplate.h" />
+    <ClInclude Include="..\Classes\Blood.h" />
     <ClInclude Include="..\Classes\BrigdeLayer.h" />
     <ClInclude Include="..\Classes\DBContext.h" />
+    <ClInclude Include="..\Classes\Dialog.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EnemySpawn.h" />
     <ClInclude Include="..\Classes\Global.h" />

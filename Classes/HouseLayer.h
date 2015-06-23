@@ -24,13 +24,11 @@ class HouseLayer : public BackgroundTemplate
 private: 
 	//std::vector<cocos2d::Sprite*> rocks;
 	cocos2d::Sprite* house;
-	static HouseLayer* instance;
 	void addHouse(int rand);
 
 	Node* createOneWayNode(float width, float height);
 	
 public:
-	static HouseLayer* inst();
 
 	cocos2d::Scene* createScene() override;
 	bool init() override;

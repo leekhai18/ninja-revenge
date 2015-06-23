@@ -3,6 +3,8 @@
 #include "Enemy.h"
 #include "SoundManager.h"
 #include "Background.h"
+#include "Blood.h"
+#include "Dialog.h"
 
 Player::Player() : Armature()
 {
@@ -36,6 +38,9 @@ bool Player::initPlayer()
 	visisbleSize = Director::getInstance()->getVisibleSize();
 	this->setTag(OBJECT_TAG::PLAYER_TAG);
 	this->setName("Player");
+	this->gold = 0;
+	this->distance = 0;
+	this->combo = 0;
 
 	this->getAnimation()->play("Jump2");
 	this->setState(ESTATE::JUMP2);
@@ -64,6 +69,8 @@ bool Player::initPlayer()
 
 void Player::update(float dt)
 {
+	if (Global::isPause)
+		return;
 	Armature::update(dt);
 	if (timeDelayAttack <= PLAYER_SLASH_DELAY)
 	{
@@ -156,6 +163,9 @@ void Player::update(float dt)
 			
 		}
 	}
+
+	//update distance
+	distance += dt * Background::SPEED_UP * 5;
 }
 
 void Player::run()
@@ -170,6 +180,8 @@ void Player::run()
 
 void Player::jump()
 {
+	if (Global::isPause)
+		return;
 	if (!isUsingSkill2)
 	{
 		if (!isJumping && (state == ESTATE::RUN || state == ESTATE::ATTACK)) {
@@ -209,6 +221,8 @@ void Player::setHold(bool val)
 
 void Player::attack()
 {
+	if (Global::isPause)
+		return;
 	if (timeDelayAttack >= PLAYER_SLASH_DELAY && !isUsingSkill2)
 	{
 		SoundManager::inst()->playSlash1Effect();
@@ -250,7 +264,16 @@ void Player::setDie()
 {
 	this->getAnimation()->play("Die");
 	this->setState(ESTATE::DIE);
+	
 	PlayerInfo::saveToDB();
+
+	auto dialog = DieDialog::createDieDialog();
+	dialog->setPosition(visisbleSize.width * 0.5, visisbleSize.height *0.4);
+	dialog->setScale(0.6);
+	this->getParent()->addChild(dialog);
+
+	Global::isPause = true;
+	Background::inst()->setSpeed(0);
 }
 
 void Player::flashUp()
@@ -273,11 +296,15 @@ void Player::setHit(int damage)
 {
 	CCLOG("Hit %d damage", damage);
 	SoundManager::inst()->playHurt1Effect();
+	this->combo = 0;
 	hitPoint -= damage;
 	if (hitPoint <= 0)
 	{
 		this->setDie();
 	}
+	auto blood = Blood::createBlood();
+	blood->setPosition(visisbleSize.width * 0.5f, visisbleSize.height * 0.5f);
+	this->getParent()->addChild(blood);
 }
 
 void Player::addAShadow()

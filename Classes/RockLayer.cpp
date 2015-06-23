@@ -1,15 +1,15 @@
 #include "RockLayer.h"
 
 USING_NS_CC;
-RockLayer* RockLayer::instance = NULL;
-
-RockLayer* RockLayer::inst(){
-	if (!instance){
-		instance = new RockLayer();
-		instance->init();
-	}
-	return instance;
-}
+//RockLayer* RockLayer::instance = NULL;
+//
+//RockLayer* RockLayer::inst(){
+//	//if (!instance){
+//		instance = new RockLayer();
+//		instance->init();
+//	//}
+//	return instance;
+//}
 
 Scene* RockLayer::createScene()
 {
@@ -50,6 +50,7 @@ bool RockLayer::init()
 }
 
 void RockLayer::update(float delta){
+
 	if (rock->getPosition().x < -400){
 		this->removeChild(rock);
 

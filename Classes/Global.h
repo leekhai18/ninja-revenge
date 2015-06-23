@@ -68,6 +68,7 @@ private:
 	}
 
 public:
+	static bool isPause;
 	//ctor & des
 	~Global()
 	{

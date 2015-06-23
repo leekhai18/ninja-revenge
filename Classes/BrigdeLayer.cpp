@@ -2,16 +2,15 @@
 #include "MyBodyParser.h"
 
 USING_NS_CC;
-BrigdeLayer* BrigdeLayer::instance = NULL;
-
-BrigdeLayer* BrigdeLayer::inst(){
-	if (!instance){
-		instance = new BrigdeLayer();
-		instance->scene = instance->createScene();
-		instance->init();
-	}
-	return instance;
-}
+//BrigdeLayer* BrigdeLayer::instance = NULL;
+//
+//BrigdeLayer* BrigdeLayer::inst(){
+//	//if (!instance){
+//		instance = new BrigdeLayer();
+//		instance->init();
+//	//}
+//	return instance;
+//}
 
 Scene* BrigdeLayer::createScene()
 {
@@ -46,6 +45,7 @@ bool BrigdeLayer::init()
 }
 
 void BrigdeLayer::update(float delta){
+
 	if (brigde == nullptr)
 		return;
 	int x = brigde->getPosition().x;

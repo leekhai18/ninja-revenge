@@ -25,9 +25,13 @@ private:
 	bool		isAttacked = false;
 	bool		isDie = false;
 	bool		isOnGround = false;
-	
+
+	bool		isBoos = false;
+	Color4F		color = Color4F::WHITE;
+
 	float		dictanceToSplash = 0;
 	int			damage = 0;
+	int			gold = 0;
 
 	Size		visibleSize;
 

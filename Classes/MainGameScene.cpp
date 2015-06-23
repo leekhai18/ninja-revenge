@@ -2,6 +2,7 @@
 #include "MyBodyParser.h"
 #include "EnemySpawn.h"
 
+
 USING_NS_CC;
 
 Scene* MainGame::createScene()
@@ -70,7 +71,7 @@ bool MainGame::init()
 	HUDLayer* hud = HUDLayer::create();
 	hud->setPlayer(player);
 	this->addChild(hud, kHUD);
-    
+
     return true;
 }
 

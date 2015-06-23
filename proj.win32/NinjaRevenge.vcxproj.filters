@@ -55,6 +55,13 @@
     <ClCompile Include="..\Classes\DBContext.cpp">
       <Filter>database</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="..\Classes\Blood.cpp">
+      <Filter>player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Dialog.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -111,6 +118,13 @@
     <ClInclude Include="..\Classes\DBContext.h">
       <Filter>database</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="..\Classes\Blood.h">
+      <Filter>player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Dialog.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
@@ -133,6 +147,9 @@
     </Filter>
     <Filter Include="database">
       <UniqueIdentifier>{44d56c07-9fc1-4512-b025-baf1db042133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialog">
+      <UniqueIdentifier>{f5b866ed-164d-48ea-9799-230335cf6e6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

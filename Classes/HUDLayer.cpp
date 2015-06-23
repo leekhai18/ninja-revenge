@@ -1,6 +1,10 @@
 #include "HUDLayer.h"
+#include "ui\CocosGUI.h"
+#include "Dialog.h"
+#include "Background.h"
 
 USING_NS_CC;
+using namespace ui;
 
 HUDLayer* HUDLayer::create()
 {
@@ -74,6 +78,59 @@ bool HUDLayer::init()
 	// Add listener
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener1, this);
 
+	auto pauseBtn = Button::create("UI\\b_pause.png");
+	pauseBtn->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			auto dialog = PauseDialog::createPauseDialog();
+			dialog->setPosition(visibleSize.width * 0.5, visibleSize.height *0.4);
+			dialog->setScale(0.6);
+			this->addChild(dialog);
+
+			Global::isPause = true;
+			Background::inst()->setSpeed(0);
+			break;
+		}
+	});
+	
+	pauseBtn->setPosition(Vec2(visibleSize.width - pauseBtn->getSize().width * 0.5, visibleSize.height - pauseBtn->getSize().height *0.5));
+	this->addChild(pauseBtn);
+
+	auto coin = Sprite::create("UI\\coin2.png");
+	coin->setPosition(coin->getContentSize().width * 0.5 + visibleSize.width * 0.038, visibleSize.height * 0.715);
+	this->addChild(coin);
+
+	lbGold = Label::createWithBMFont("an24.fnt", "0");
+	lbGold->setColor(Color3B(Color4F::YELLOW));
+	lbGold->setPosition(coin->getPositionX() + coin->getContentSize().width, coin->getPositionY());
+	this->addChild(lbGold);
+
+	lbDistance = Label::createWithBMFont("an32.fnt", "0");
+	lbDistance->setPosition(coin->getPositionX() + visibleSize.width * 0.25, coin->getPositionY() + coin->getContentSize().height * 1.3);
+	this->addChild(lbDistance);
+
+	sprHit = Sprite::create("UI\\t_hit.png");
+	sprHit->setPositionX(sprHit->getContentSize().width * 0.5);
+
+	sprHits = Sprite::create("UI\\t_hits.png");
+	sprHits->setPositionX(sprHits->getContentSize().width * 0.5);
+	sprHits->setVisible(false);
+
+	lbCombo = Label::createWithBMFont("number72.fnt", "1 Hit");
+	lbCombo->setPositionX(-sprHits->getContentSize().width * 0.25);
+	lbCombo->setColor(Color3B(Color4F::RED));
+
+	auto comboNode = Node::create();
+	comboNode->addChild(lbCombo);
+	comboNode->addChild(sprHit);
+	comboNode->addChild(sprHits);
+	comboNode->setRotation(-30);
+	comboNode->setPosition(visibleSize.width * 0.8, visibleSize.height * 0.5);
+	this->addChild(comboNode);
+
 	this->scheduleUpdate();
 	return true;
 }
@@ -109,6 +166,38 @@ void HUDLayer::update(float dt)
 	else
 		this->bladeStormItem->setEnabled(false);
 	updateHpBar();
+	
+	char stringGold[12] = { 0 };
+	sprintf(stringGold, "x %d", player->getGold());
+	lbGold->setString(stringGold);
+
+	char stringDistance[12] = { 0 };
+	sprintf(stringDistance, "%d", (int)player->getDistance());
+	lbDistance->setString(stringDistance);
+
+	if (player->getCombo() > 0)
+	{
+		if (player->getCombo() > 1)
+		{
+			sprHit->setVisible(false);
+			sprHits->setVisible(true);
+		}
+		else
+		{
+			sprHit->setVisible(true);
+			sprHits->setVisible(false);
+		}
+		char stringCombo[12] = { 0 };
+		sprintf(stringCombo, "%d", (int)player->getCombo());
+		lbCombo->setString(stringCombo);
+	}
+	else
+	{
+		sprHit->setVisible(false);
+		sprHits->setVisible(false);
+		lbCombo->setString("");
+	}
+	
 }
 
 void HUDLayer::slash(Ref* sender)

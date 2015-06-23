@@ -12,9 +12,7 @@ class RockLayer : public BackgroundTemplate
 {
 private: 
 	cocos2d::Sprite* rock;
-	static RockLayer* instance;
 public:
-	static RockLayer* inst();
 
 	cocos2d::Scene* createScene() override;
 	bool init() override;

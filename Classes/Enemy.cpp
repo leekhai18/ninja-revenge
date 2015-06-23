@@ -25,17 +25,46 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 	visibleSize = Director::getInstance()->getVisibleSize();
 	enemyType = _type;
 
+	int rand = random(0, 5);
+	if (rand < 2)
+	{
+		isBoos = true;
+		this->setColor(Color3B(Color4F::RED));
+	}
+
 	if (_type == ENEMY_TYPE::ENEMY1)
 	{
 		this->init("enemy1");
-		dictanceToSplash = visibleSize.width * 0.4;
-		damage = 25;
+		
+		if (isBoos)
+		{
+			dictanceToSplash = visibleSize.width * 0.5f;
+			damage = 55;
+			gold = 5;
+		}
+		else
+		{
+			dictanceToSplash = visibleSize.width * 0.4f;
+			damage = 25;
+			gold = 3;
+		}
 	}
 	else if (_type == ENEMY_TYPE::ENEMY2)
 	{
 		this->init("enemy2");
-		dictanceToSplash = visibleSize.width * 0.4;
-		damage = 30;
+		
+		if (isBoos)
+		{
+			dictanceToSplash = visibleSize.width * 0.5f;
+			damage = 55;
+			gold = 8;
+		}
+		else
+		{
+			dictanceToSplash = visibleSize.width * 0.4f;
+			damage = 25;
+			gold = 5;
+		}
 	}
 
 	this->setTag(OBJECT_TAG::ENEMY_TAG);
@@ -62,7 +91,10 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 
 void Enemy::update(float dt)
 {
+	if (Global::isPause)
+		return;
 	Armature::update(dt);
+
 	this->setPositionX(this->getPositionX() - ENEMY_SPEED * Background::SPEED_UP * dt);
 	if (this->getPositionX() < dictanceToSplash)
 	{
@@ -114,10 +146,15 @@ void Enemy::attack()
 
 void Enemy::setDie()
 {
-	NUM_OF_ENEMY_KILLED++;
-	this->getAnimation()->play("Die");
-	this->setState(ESTATE::DIE);
-	SoundManager::inst()->playDie1Effect();
+	if (state != ESTATE::DIE)
+	{
+		NUM_OF_ENEMY_KILLED++;
+		player->setGold(player->getGold() + this->gold);
+		player->setCombo(player->getCombo() + 1);
+		this->getAnimation()->play("Die");
+		this->setState(ESTATE::DIE);
+		SoundManager::inst()->playDie1Effect();
+	}
 }
 
 void Enemy::animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)

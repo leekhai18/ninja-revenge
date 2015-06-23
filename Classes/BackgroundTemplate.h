@@ -4,6 +4,7 @@
 
 #define BG_N_HOUSE 4
 #include "cocos2d.h"
+#include "Global.h"
 //#include "WallLayer.h"
 
 class BackgroundTemplate : public cocos2d::Layer
@@ -11,6 +12,8 @@ class BackgroundTemplate : public cocos2d::Layer
 private:
 	static BackgroundTemplate* instance;
 protected:
+	cocos2d::Layer* layer;
+	cocos2d::Scene* scene;
 	float layerSpeed;
 public:
 	void setLayerSpeed(float speed);

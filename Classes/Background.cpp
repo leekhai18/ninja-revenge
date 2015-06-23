@@ -22,31 +22,36 @@ void Background::setSpeed(float percent){
 }
 
 BackgroundLayer* Background::createBackground(){
-	this->backgroundLayer = BackgroundLayer::inst();
+	this->backgroundLayer = new BackgroundLayer();
+	backgroundLayer->init();
 	backgroundLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->backgroundLayer;
 }
 
 HouseLayer* Background::createHouse(){
-	this->houseLayer = HouseLayer::inst();
+	this->houseLayer = new HouseLayer();
+	houseLayer->init();
 	houseLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->houseLayer;
 }
 
 WallLayer* Background::createWall(){
-	this->wallLayer = WallLayer::inst();
+	this->wallLayer = new WallLayer();
+	wallLayer->init();
 	wallLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->wallLayer;
 }
 
 RockLayer* Background::createRock(){
-	this->rockLayer = RockLayer::inst();
+	this->rockLayer = new RockLayer();
+	rockLayer->init();
 	rockLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->rockLayer;
 }
 
 BrigdeLayer* Background::createBrigde(){
-	this->brigdeLayer = BrigdeLayer::inst();
+	this->brigdeLayer = new BrigdeLayer();
+	brigdeLayer->init();
 	brigdeLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->brigdeLayer;
 }

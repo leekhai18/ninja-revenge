@@ -1,4 +1,6 @@
 #include "StoryScene.h"
+#include "Global.h"
+#include "Background.h"
 
 Scene* Story::createScene()
 {
@@ -31,6 +33,7 @@ bool Story::init()
 	auto story = Armature::create("story");
 	story->setPosition(visibleSize.width * 0.5f + origin.x, visibleSize.height * 0.5f + origin.y);
 	story->getAnimation()->play("Appear");
+	story->getAnimation()->setSpeedScale(0.7f);
 	this->addChild(story);
 
 	//add event listener
@@ -56,7 +59,8 @@ bool Story::init()
 void Story::nextScene()
 {
 	auto scene = MainGame::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(1, scene, Color3B(0, 0, 0)));
+	Director::getInstance()->replaceScene(TransitionFade::create(1, scene, Color3B(0, 0, 0)));	
+	Background::inst()->setSpeed(1);
 }
 
 void Story::animationEvent(Armature *armature, MovementEventType movementType, const std::string& movementID)

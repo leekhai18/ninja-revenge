@@ -36,6 +36,13 @@ private:
 
 	Sprite *hpBarBorder, *headIcon;
 	CCProgressTimer *hpBar;
+
+	Label* lbDistance;
+	Label* lbGold;
+	Label* lbCombo;
+
+	Sprite* sprHit;
+	Sprite* sprHits;
 public:
 	static HUDLayer* create();
 
