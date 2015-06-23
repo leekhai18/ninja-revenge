@@ -13,7 +13,7 @@ SoundManager* SoundManager::inst(){
 void SoundManager::init(){
 	this->audio = CocosDenshion::SimpleAudioEngine::getInstance();
 
-	this->audio->preloadBackgroundMusic(THEME_PATH);
+	this->audio->preloadBackgroundMusic("theme.wav");
 
 	this->audio->preloadEffect(ARROW_PATH);
 	this->audio->preloadEffect(CLICK_PATH);
@@ -42,7 +42,7 @@ void SoundManager::init(){
 
 
 void SoundManager::playBackgroundTheme(bool isLoop){
-	this->audio->playBackgroundMusic(THEME_PATH, isLoop);
+	this->audio->playBackgroundMusic("theme.wav", true);
 }
 
 void SoundManager::stopBackgroundTheme(){

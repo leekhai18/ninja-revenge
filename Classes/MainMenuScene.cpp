@@ -103,10 +103,10 @@ bool MainMenuScene::init()
 	// create menu, it's an autorelease object
 	cocos2d::Vector<MenuItem*> items;
 	items.pushBack(startItem);
-	items.pushBack(PowerItem);
-	items.pushBack(questItem);
+	//items.pushBack(PowerItem);
+	//items.pushBack(questItem);
 	items.pushBack(recordItem);
-	items.pushBack(settingItem);
+	//items.pushBack(settingItem);
 	auto menu = Menu::createWithArray(items);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
