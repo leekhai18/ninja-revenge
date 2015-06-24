@@ -12,11 +12,8 @@ class BrigdeLayer : public BackgroundTemplate
 {
 private: 
 	cocos2d::Sprite* brigde;
-	cocos2d::Scene* scene;
-	static BrigdeLayer* instance;
 public:
 
-	static BrigdeLayer* inst();
 	void addBrigde(float xLocation);
 
 	cocos2d::Scene* createScene() override;

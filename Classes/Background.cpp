@@ -18,35 +18,49 @@ void Background::setSpeed(float percent){
 	this->brigdeLayer->setLayerSpeed(GROUND_SPEED*percent);
 	this->rockLayer->setLayerSpeed(BACKGROUND_SPEED*percent);
 	this->wallLayer->setLayerSpeed(GROUND_SPEED*percent);
+	this->acceleration = percent;
 	SPEED_UP = percent;
 }
 
+void Background::update(float delta){
+	//this->accelTime += delta;
+	//if (this->accelTime > 0.1f){
+	//	this->setSpeed(this->acceleration + 0.03f);
+	//	accelTime = 0.0f;
+	//}
+}
+
 BackgroundLayer* Background::createBackground(){
-	this->backgroundLayer = BackgroundLayer::inst();
+	this->backgroundLayer = new BackgroundLayer();
+	backgroundLayer->init();
 	backgroundLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->backgroundLayer;
 }
 
 HouseLayer* Background::createHouse(){
-	this->houseLayer = HouseLayer::inst();
+	this->houseLayer = new HouseLayer();
+	houseLayer->init();
 	houseLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->houseLayer;
 }
 
 WallLayer* Background::createWall(){
-	this->wallLayer = WallLayer::inst();
+	this->wallLayer = new WallLayer();
+	wallLayer->init();
 	wallLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->wallLayer;
 }
 
 RockLayer* Background::createRock(){
-	this->rockLayer = RockLayer::inst();
+	this->rockLayer = new RockLayer();
+	rockLayer->init();
 	rockLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->rockLayer;
 }
 
 BrigdeLayer* Background::createBrigde(){
-	this->brigdeLayer = BrigdeLayer::inst();
+	this->brigdeLayer = new BrigdeLayer();
+	brigdeLayer->init();
 	brigdeLayer->setLayerSpeed(BACKGROUND_SPEED);
 	return this->brigdeLayer;
 }

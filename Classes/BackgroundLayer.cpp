@@ -2,15 +2,15 @@
 #include "Global.h"
 
 USING_NS_CC;
-BackgroundLayer* BackgroundLayer::instance = NULL;
-
-BackgroundLayer* BackgroundLayer::inst(){
-	if (!instance){
-		instance = new BackgroundLayer();
-		instance->init();
-	}
-	return instance;
-}
+//BackgroundLayer* BackgroundLayer::instance = NULL;
+//
+//BackgroundLayer* BackgroundLayer::inst(){
+//	//if (!instance){
+//		instance = new BackgroundLayer();
+//		instance->init();
+//	//}
+//	return instance;
+//}
 
 Scene* BackgroundLayer::createScene()
 {

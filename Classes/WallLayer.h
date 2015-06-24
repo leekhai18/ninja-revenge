@@ -16,10 +16,8 @@ class WallLayer : public BackgroundTemplate
 private: 
 	std::vector<cocos2d::Sprite*> walls;
 	std::vector<cocos2d::Sprite*> grounds;
-	static WallLayer* instance;
 public:
 
-	static WallLayer* inst();
 
 	cocos2d::Scene* createScene() override;
 	bool init() override;

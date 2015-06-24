@@ -1,15 +1,15 @@
 #include "RockLayer.h"
 
 USING_NS_CC;
-RockLayer* RockLayer::instance = NULL;
-
-RockLayer* RockLayer::inst(){
-	if (!instance){
-		instance = new RockLayer();
-		instance->init();
-	}
-	return instance;
-}
+//RockLayer* RockLayer::instance = NULL;
+//
+//RockLayer* RockLayer::inst(){
+//	//if (!instance){
+//		instance = new RockLayer();
+//		instance->init();
+//	//}
+//	return instance;
+//}
 
 Scene* RockLayer::createScene()
 {

@@ -22,7 +22,6 @@
 class BackgroundLayer : public BackgroundTemplate
 {
 private: 
-	static BackgroundLayer* instance;
 	std::vector<cocos2d::Sprite*> houses;
 	cocos2d::Sprite* background;
 public:
@@ -30,7 +29,6 @@ public:
 	bool init() override;
 	void update(float delta) override;
 
-	static BackgroundLayer* inst();
 	
 };
 

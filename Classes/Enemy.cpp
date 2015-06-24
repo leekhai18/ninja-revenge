@@ -38,13 +38,13 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 		
 		if (isBoos)
 		{
-			dictanceToSplash = visibleSize.width * 0.5f;
+			dictanceToSplash = visibleSize.width * 0.55f;
 			damage = 55;
 			gold = 5;
 		}
 		else
 		{
-			dictanceToSplash = visibleSize.width * 0.4f;
+			dictanceToSplash = visibleSize.width * 0.5f;
 			damage = 25;
 			gold = 3;
 		}
@@ -55,13 +55,13 @@ bool Enemy::initEnemy(ENEMY_TYPE _type)
 		
 		if (isBoos)
 		{
-			dictanceToSplash = visibleSize.width * 0.5f;
+			dictanceToSplash = visibleSize.width * 0.55f;
 			damage = 55;
 			gold = 8;
 		}
 		else
 		{
-			dictanceToSplash = visibleSize.width * 0.4f;
+			dictanceToSplash = visibleSize.width * 0.5f;
 			damage = 25;
 			gold = 5;
 		}

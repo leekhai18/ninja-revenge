@@ -2,15 +2,15 @@
 #include "Global.h"
 
 USING_NS_CC;
-HouseLayer* HouseLayer::instance = NULL;
-
-HouseLayer* HouseLayer::inst(){
-	if (!instance){
-		instance = new HouseLayer();
-		instance->init();
-	}
-	return instance;
-}
+//HouseLayer* HouseLayer::instance = NULL;
+//
+//HouseLayer* HouseLayer::inst(){
+//	//if (!instance){
+//		instance = new HouseLayer();
+//		instance->init();
+//	//}
+//	return instance;
+//}
 
 
 Scene* HouseLayer::createScene()
@@ -88,9 +88,9 @@ void HouseLayer::addHouse(int rand){
 
 	switch (rand){
 	case 0: {
-				path = BRIGDE_BACK_1_PATH; diff = BRIGDE_BACK_1_HEIGHT / 2 - WALL_HEIGHT; scaleFactor = 1.0f;
-				BrigdeLayer::inst()->addBrigde(pos + visibleSize.width); 
-				house = Sprite::create(path);
+				//path = BRIGDE_BACK_1_PATH; diff = BRIGDE_BACK_1_HEIGHT / 2 - WALL_HEIGHT; scaleFactor = 1.0f;
+				//BrigdeLayer::inst()->addBrigde(pos + visibleSize.width); 
+				//house = Sprite::create(path);
 				break;
 	}
 				

@@ -3,24 +3,24 @@
 
 USING_NS_CC;
 
-WallLayer* WallLayer::instance = NULL;
-
-WallLayer* WallLayer::inst(){
-	if (!instance){
-		instance = new WallLayer();
-		instance->init();
-	}
-	return instance;
-}
+//WallLayer* WallLayer::instance = NULL;
+//
+//WallLayer* WallLayer::inst(){
+//	//if (!instance){
+//		instance = new WallLayer();
+//		instance->init();
+//	//}
+//	return instance;
+//}
 
 Scene* WallLayer::createScene()
 {
 	// 'scene' is an autorelease object
-	auto scene = Scene::create();
-
+	 scene = Scene::create();
+	 scene->retain();
 	// 'layer' is an autorelease object
 	auto layer = WallLayer::create();
-
+	layer->retain();
 	// add layer as a child to scene
 	scene->addChild(layer);
 

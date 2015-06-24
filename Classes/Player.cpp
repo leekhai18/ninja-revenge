@@ -116,7 +116,7 @@ void Player::update(float dt)
 			isUsingSkill1 = false;
 			timeOfSkill1 = 0;
 			timeCoolDownSkill1 = 0;
-			Background::inst()->setSpeed(1);
+			Background::inst()->setSpeed(Background::SPEED_UP - 0.5f);
 		}
 		else
 		{
@@ -153,7 +153,7 @@ void Player::update(float dt)
 			isUsingSkill2 = false;
 			timeOfSkill2 = 0;
 			timeCoolDownSkill2 = 0;
-			Background::inst()->setSpeed(1);
+			Background::inst()->setSpeed(Background::SPEED_UP - 0.7f);
 			this->stopAllActions();
 			this->run();
 			this->setPositionY(groundPosition);
@@ -239,7 +239,7 @@ void Player::useOmislash()
 {
 	if (canUseSkill1)
 	{
-		Background::inst()->setSpeed(1.5f);	
+		Background::inst()->setSpeed(Background::SPEED_UP + 0.5f);	
 		isUsingSkill1 = true;
 		canUseSkill1 = false;
 	}
@@ -249,7 +249,7 @@ void Player::useBladeStorm()
 {
 	if (canUseSkill2)
 	{
-		Background::inst()->setSpeed(1.7f);
+		Background::inst()->setSpeed(Background::SPEED_UP + 0.7f);
 		state = ESTATE::SKILL2;
 		isUsingSkill2 = true;
 		canUseSkill2 = false;

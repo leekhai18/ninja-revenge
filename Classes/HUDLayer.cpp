@@ -197,7 +197,7 @@ void HUDLayer::update(float dt)
 		sprHits->setVisible(false);
 		lbCombo->setString("");
 	}
-	
+	Background::inst()->update(dt);
 }
 
 void HUDLayer::slash(Ref* sender)
@@ -325,11 +325,10 @@ void HUDLayer::initHpBar()
 	// Set this progress bar object as kCCProgressTimerTypeBar (%)
 	hpBar->setType(ProgressTimerType::BAR);
 	// Set anchor point in 0,0 and add it as a child to our border sprite
-	hpBar->setZOrder(69);
 	hpBar->setAnchorPoint(ccp(0, 0));
 	hpBar->setMidpoint(ccp(0, 0));
 	hpBar->setPosition(Vec2(hpBarBorder->getContentSize().width / 3, hpBarBorder->getContentSize().height / 2));
-	hpBar->setBarChangeRate(ccp(1, 0)); // To make width 100% always
+	hpBar->setBarChangeRate(ccp(1, 0)); // right to left
 	hpBar->setPercentage(100);
 	hpBarBorder->addChild(hpBar); // Add it inside the border sprite
 
